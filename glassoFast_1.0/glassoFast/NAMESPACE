@@ -1,0 +1,2 @@
+export(glassoFast)
+useDynLib(glassoFast, .registration = TRUE)

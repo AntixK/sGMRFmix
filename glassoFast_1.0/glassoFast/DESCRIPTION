@@ -1,0 +1,16 @@
+Package: glassoFast
+Type: Package
+Title: Fast Graphical LASSO
+Version: 1.0
+Date: 2018-07-17
+Suggests: glasso, rbenchmark
+Author: Matyas A Sustik [aut, cph], 
+		Ben Calderhead [aut, cph],
+		Julien Clavel [com, ctb]
+Maintainer: Julien Clavel <julien.clavel@hotmail.fr>
+Description: A fast and improved implementation of the graphical LASSO.
+License: GPL (>= 3)
+NeedsCompilation: yes
+Packaged: 2018-07-26 11:48:33 UTC; julienclavel
+Repository: CRAN
+Date/Publication: 2018-07-30 12:10:12 UTC

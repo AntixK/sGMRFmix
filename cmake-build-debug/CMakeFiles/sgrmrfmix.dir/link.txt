@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/sgrmrfmix.dir/src/main.cpp.o CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o  -o sgrmrfmix  -larmadillo -llapack -lblas -lboost_system 
