@@ -4,6 +4,7 @@ Python library for sGMRFmix model for anomaly detection in time-series data.
 sGMRFmix is short for sparse mixture of Gaussian Markov Random Fields.
 
 ## Model Overview
+![sGMRFmix Model](https://github.com/AntixK/sGMRFmix/assets/model_overview.png)
 
 ## Installation
 
@@ -17,12 +18,14 @@ sudo apt install libboost-all-dev
 
 ### Build from source
 
-## pip installation
+### pip installation
 
 ## Usage
 ```python
 import numpy as np
 from sgmrfmix import sGMRFmix
+X_train =
+X_test = 
 
 model = sGMRFmix()
 model.fit(X_train)
