@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -DVERSION_INFO=\"0.1\" -O3 -DNDEBUG -flto -shared  -o ../../_sgmrfmix.cpython-39-x86_64-linux-gnu.so CMakeFiles/_sgmrfmix.dir/src/_sgmrfmix.cpp.o  -larmadillo -llapack -lblas -lboost_system 

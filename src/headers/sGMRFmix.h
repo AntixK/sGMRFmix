@@ -15,14 +15,14 @@
 using namespace arma;
 
 
-void sGMRFmix(const Mat<double> &X, // (NxM)
+void sGMRFmix(const Mat<double> &X, // (N, M)
               int &K,
               double rho,
               rowvec &m0,   // (M x 1)
               // Return arguments
               Cube<double> &A, // (M, M, K)
               Mat<double> &m, // (K, M)
-              Mat<double> &g_mat, // (N x K)
+              Mat<double> &g_mat, // (N , K)
               bool do_kmeans=false,
               double pi_threshold = 0.01,
               double lambda0 = 1.0,

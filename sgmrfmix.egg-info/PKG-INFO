@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: sgmrfmix
+Version: 0.1
+Summary: Python library for sparse Gaussian Markov Random Field mixtures for anomaly detection
+Home-page: https://github.com/AntixK/sGMRFmix
+Author: Anand K Subramanian
+Author-email: anandkrish894@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

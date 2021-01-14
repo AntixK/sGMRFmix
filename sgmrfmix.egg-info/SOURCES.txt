@@ -1,0 +1,10 @@
+README.md
+setup.py
+sgmrfmix/__init__.py
+sgmrfmix/model.py
+sgmrfmix.egg-info/PKG-INFO
+sgmrfmix.egg-info/SOURCES.txt
+sgmrfmix.egg-info/dependency_links.txt
+sgmrfmix.egg-info/not-zip-safe
+sgmrfmix.egg-info/requires.txt
+sgmrfmix.egg-info/top_level.txt
