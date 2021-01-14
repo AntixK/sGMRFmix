@@ -17,7 +17,7 @@ using namespace arma;
 
 
 void sGMRFmix(const Mat<double> &X, // (NxM)
-              double &K,
+              int &K,
               double rho,
               rowvec &m0,   // (M x 1)
               // Return arguments

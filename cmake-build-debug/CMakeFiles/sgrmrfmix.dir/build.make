@@ -60,18 +60,18 @@ include CMakeFiles/sgrmrfmix.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/sgrmrfmix.dir/flags.make
 
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: CMakeFiles/sgrmrfmix.dir/flags.make
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sgrmrfmix.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sgrmrfmix.dir/src/main.cpp.o -c /home/antixk/Anand/Projects/sGMRFmix/src/main.cpp
+CMakeFiles/sgrmrfmix.dir/src/test.cpp.o: CMakeFiles/sgrmrfmix.dir/flags.make
+CMakeFiles/sgrmrfmix.dir/src/test.cpp.o: ../src/test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sgrmrfmix.dir/src/test.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sgrmrfmix.dir/src/test.cpp.o -c /home/antixk/Anand/Projects/sGMRFmix/src/test.cpp
 
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sgrmrfmix.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/antixk/Anand/Projects/sGMRFmix/src/main.cpp > CMakeFiles/sgrmrfmix.dir/src/main.cpp.i
+CMakeFiles/sgrmrfmix.dir/src/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sgrmrfmix.dir/src/test.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/antixk/Anand/Projects/sGMRFmix/src/test.cpp > CMakeFiles/sgrmrfmix.dir/src/test.cpp.i
 
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sgrmrfmix.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/antixk/Anand/Projects/sGMRFmix/src/main.cpp -o CMakeFiles/sgrmrfmix.dir/src/main.cpp.s
+CMakeFiles/sgrmrfmix.dir/src/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sgrmrfmix.dir/src/test.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/antixk/Anand/Projects/sGMRFmix/src/test.cpp -o CMakeFiles/sgrmrfmix.dir/src/test.cpp.s
 
 CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o: CMakeFiles/sgrmrfmix.dir/flags.make
 CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o: ../src/_sgmrfmix.cpp
@@ -88,13 +88,13 @@ CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.s: cmake_force
 
 # Object files for target sgrmrfmix
 sgrmrfmix_OBJECTS = \
-"CMakeFiles/sgrmrfmix.dir/src/main.cpp.o" \
+"CMakeFiles/sgrmrfmix.dir/src/test.cpp.o" \
 "CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o"
 
 # External object files for target sgrmrfmix
 sgrmrfmix_EXTERNAL_OBJECTS =
 
-sgrmrfmix: CMakeFiles/sgrmrfmix.dir/src/main.cpp.o
+sgrmrfmix: CMakeFiles/sgrmrfmix.dir/src/test.cpp.o
 sgrmrfmix: CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o
 sgrmrfmix: CMakeFiles/sgrmrfmix.dir/build.make
 sgrmrfmix: CMakeFiles/sgrmrfmix.dir/link.txt

@@ -459,3 +459,74 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Performing C++ SOURCE FILE Test HAS_FLTO succeeded with the following output:
+Change Dir: /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_285ac/fast && /usr/bin/make -f CMakeFiles/cmTC_285ac.dir/build.make CMakeFiles/cmTC_285ac.dir/build
+make[1]: Entering directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_285ac.dir/src.cxx.o
+/usr/bin/c++    -DHAS_FLTO   -flto -fno-fat-lto-objects -std=gnu++17 -o CMakeFiles/cmTC_285ac.dir/src.cxx.o -c /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_285ac
+/home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_285ac.dir/link.txt --verbose=1
+/usr/bin/c++   -DHAS_FLTO    CMakeFiles/cmTC_285ac.dir/src.cxx.o  -o cmTC_285ac  -flto 
+make[1]: Leaving directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main() { return 0; }
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1aa34/fast && /usr/bin/make -f CMakeFiles/cmTC_1aa34.dir/build.make CMakeFiles/cmTC_1aa34.dir/build
+make[1]: Entering directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1aa34.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_1aa34.dir/CheckIncludeFile.c.o   -c /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_1aa34
+/home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1aa34.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_1aa34.dir/CheckIncludeFile.c.o  -o cmTC_1aa34 
+make[1]: Leaving directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_15fea/fast && /usr/bin/make -f CMakeFiles/cmTC_15fea.dir/build.make CMakeFiles/cmTC_15fea.dir/build
+make[1]: Entering directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_15fea.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_15fea.dir/CheckFunctionExists.c.o   -c /home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_15fea
+/home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_15fea.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_15fea.dir/CheckFunctionExists.c.o  -o cmTC_15fea  -lpthread 
+make[1]: Leaving directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function sgemm_ exists passed with the following output:
+Change Dir: /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_219df/fast && /usr/bin/make -f CMakeFiles/cmTC_219df.dir/build.make CMakeFiles/cmTC_219df.dir/build
+make[1]: Entering directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_219df.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=sgemm_   -o CMakeFiles/cmTC_219df.dir/CheckFunctionExists.c.o   -c /home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_219df
+/home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_219df.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=sgemm_    CMakeFiles/cmTC_219df.dir/CheckFunctionExists.c.o  -o cmTC_219df  /usr/lib/x86_64-linux-gnu/libopenblas.so 
+make[1]: Leaving directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function cheev_ exists passed with the following output:
+Change Dir: /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2011a/fast && /usr/bin/make -f CMakeFiles/cmTC_2011a.dir/build.make CMakeFiles/cmTC_2011a.dir/build
+make[1]: Entering directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2011a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=cheev_   -o CMakeFiles/cmTC_2011a.dir/CheckFunctionExists.c.o   -c /home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2011a
+/home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2011a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=cheev_    CMakeFiles/cmTC_2011a.dir/CheckFunctionExists.c.o  -o cmTC_2011a  /usr/lib/x86_64-linux-gnu/libopenblas.so 
+make[1]: Leaving directory '/home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+

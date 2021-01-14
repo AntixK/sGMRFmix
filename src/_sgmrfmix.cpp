@@ -3,7 +3,6 @@
 #include <armadillo>
 #include "headers/sGMRFmix.h"
 
-
 /* ---------------------------
  *       C++ Code
  * --------------------------*/
@@ -49,10 +48,25 @@ py::dict py_sGMRFmix(
     return results;
 }
 
+py::dict py_compute_anomaly(
+        py::array_t<double, py::array::f_style> test_data,
+        py::array_t<double, py::array::f_style> A,
+        py::array_t<double, py::array::f_style> m,
+        py::array_t<double, py::array::f_style> g_mat,
+        bool verbose = false;
+        ){
+
+    compute_anomaly_score(test, A, m, g_mat, anomaly_score, true);
+    auto results = py::dict();
+
+    return results;
+}
+
 
 // wrap as Python module
 PYBIND11_MODULE(_sgmrfmix, module) {
 module.doc() = "A wrapper module around the sGMRFmix C++ implementation";
 
-module.def("sGMRFmix", &py_sGMRFmix, "Calculate the skeleton for a given np.Array");
+module.def("sgmrfmix_fit", &py_sGMRFmix, "Fits a sGMRFmix model for the given data ");
+module.def("compute_anomaly_score", &py_compute_anomaly, "Computes the anomaly score based on the learnt sGMRFmix model");
 }

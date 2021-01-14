@@ -6,8 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/antixk/Anand/Projects/sGMRFmix/src/_sgmrfmix.cpp
-
 /home/antixk/Anand/Projects/sGMRFmix/src/headers/compute_anomaly.h
 armadillo
 -
