@@ -4,11 +4,11 @@
 CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o
  /home/antixk/Anand/Projects/sGMRFmix/src/_sgmrfmix.cpp
 CMakeFiles/sgrmrfmix.dir/src/main.cpp.o
+ /home/antixk/Anand/Projects/sGMRFmix/src/headers/compute_anomaly.h
+ /home/antixk/Anand/Projects/sGMRFmix/src/headers/dmvnorm.h
+ /home/antixk/Anand/Projects/sGMRFmix/src/headers/glasso.h
+ /home/antixk/Anand/Projects/sGMRFmix/src/headers/gmrfmix.h
+ /home/antixk/Anand/Projects/sGMRFmix/src/headers/sGMRFmix.h
+ /home/antixk/Anand/Projects/sGMRFmix/src/headers/sgaussmix.h
  /home/antixk/Anand/Projects/sGMRFmix/src/lib/termcolor.h
  /home/antixk/Anand/Projects/sGMRFmix/src/main.cpp
- /home/antixk/Anand/Projects/sGMRFmix/src/sgmrfmix/compute_anomaly.h
- /home/antixk/Anand/Projects/sGMRFmix/src/sgmrfmix/dmvnorm.h
- /home/antixk/Anand/Projects/sGMRFmix/src/sgmrfmix/glasso.h
- /home/antixk/Anand/Projects/sGMRFmix/src/sgmrfmix/gmrfmix.h
- /home/antixk/Anand/Projects/sGMRFmix/src/sgmrfmix/sGMRFmix.h
- /home/antixk/Anand/Projects/sGMRFmix/src/sgmrfmix/sgaussmix.h

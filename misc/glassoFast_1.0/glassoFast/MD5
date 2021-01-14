@@ -1,0 +1,8 @@
+41cebfcdd692d65a7c9f4984a8c4df1c *DESCRIPTION
+f893b0fb5f604e328c28a31451f27920 *NAMESPACE
+67c7f52e66f1e75e3a3a23f2c23bfd96 *R/glassoFast.R
+161d6bee164889cb957156312eaf553f *README.md
+bb28a1c6d216faa5f9d7900281ee2b2a *man/glassoFast-package.Rd
+98f69de7a662174570759ab2d181ae75 *man/glassoFast.Rd
+9b996af4b0557c906cbf3201f24dcc42 *src/glassoFast_init.c
+0efa168a5fef554ad8f8fcae9837757c *src/glassofast.f90

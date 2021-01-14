@@ -1,7 +1,7 @@
 #include <iostream>
 #include <armadillo>
 #include <chrono>
-#include "sgmrfmix/sGMRFmix.h"
+#include "headers/sGMRFmix.h"
 
 
 using namespace std;

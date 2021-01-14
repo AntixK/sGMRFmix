@@ -3,12 +3,12 @@
 
 CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o: ../src/_sgmrfmix.cpp
 
+CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/headers/compute_anomaly.h
+CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/headers/dmvnorm.h
+CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/headers/glasso.h
+CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/headers/gmrfmix.h
+CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/headers/sGMRFmix.h
+CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/headers/sgaussmix.h
 CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/lib/termcolor.h
 CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/main.cpp
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/sgmrfmix/compute_anomaly.h
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/sgmrfmix/dmvnorm.h
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/sgmrfmix/glasso.h
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/sgmrfmix/gmrfmix.h
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/sgmrfmix/sGMRFmix.h
-CMakeFiles/sgrmrfmix.dir/src/main.cpp.o: ../src/sgmrfmix/sgaussmix.h
 
