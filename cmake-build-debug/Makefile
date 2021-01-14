@@ -126,13 +126,26 @@ sgrmrfmix/fast:
 	$(MAKE) -f CMakeFiles/sgrmrfmix.dir/build.make CMakeFiles/sgrmrfmix.dir/build
 .PHONY : sgrmrfmix/fast
 
+#=============================================================================
+# Target rules for targets named _sgmrfmix
+
+# Build rule for target.
+_sgmrfmix: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _sgmrfmix
+.PHONY : _sgmrfmix
+
+# fast build rule for target.
+_sgmrfmix/fast:
+	$(MAKE) -f CMakeFiles/_sgmrfmix.dir/build.make CMakeFiles/_sgmrfmix.dir/build
+.PHONY : _sgmrfmix/fast
+
 src/_sgmrfmix.o: src/_sgmrfmix.cpp.o
 
 .PHONY : src/_sgmrfmix.o
 
 # target to build an object file
 src/_sgmrfmix.cpp.o:
-	$(MAKE) -f CMakeFiles/sgrmrfmix.dir/build.make CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o
+	$(MAKE) -f CMakeFiles/_sgmrfmix.dir/build.make CMakeFiles/_sgmrfmix.dir/src/_sgmrfmix.cpp.o
 .PHONY : src/_sgmrfmix.cpp.o
 
 src/_sgmrfmix.i: src/_sgmrfmix.cpp.i
@@ -141,7 +154,7 @@ src/_sgmrfmix.i: src/_sgmrfmix.cpp.i
 
 # target to preprocess a source file
 src/_sgmrfmix.cpp.i:
-	$(MAKE) -f CMakeFiles/sgrmrfmix.dir/build.make CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.i
+	$(MAKE) -f CMakeFiles/_sgmrfmix.dir/build.make CMakeFiles/_sgmrfmix.dir/src/_sgmrfmix.cpp.i
 .PHONY : src/_sgmrfmix.cpp.i
 
 src/_sgmrfmix.s: src/_sgmrfmix.cpp.s
@@ -150,7 +163,7 @@ src/_sgmrfmix.s: src/_sgmrfmix.cpp.s
 
 # target to generate assembly for a file
 src/_sgmrfmix.cpp.s:
-	$(MAKE) -f CMakeFiles/sgrmrfmix.dir/build.make CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.s
+	$(MAKE) -f CMakeFiles/_sgmrfmix.dir/build.make CMakeFiles/_sgmrfmix.dir/src/_sgmrfmix.cpp.s
 .PHONY : src/_sgmrfmix.cpp.s
 
 src/test.o: src/test.cpp.o
@@ -189,6 +202,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sgrmrfmix"
+	@echo "... _sgmrfmix"
 	@echo "... src/_sgmrfmix.o"
 	@echo "... src/_sgmrfmix.i"
 	@echo "... src/_sgmrfmix.s"

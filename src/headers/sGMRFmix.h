@@ -11,7 +11,6 @@
 #include <cassert>
 #include "sgaussmix.h"
 #include "gmrfmix.h"
-#include "compute_anomaly.h"
 
 using namespace arma;
 

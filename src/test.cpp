@@ -2,6 +2,7 @@
 #include <armadillo>
 #include <chrono>
 #include "headers/sGMRFmix.h"
+#include "headers/compute_anomaly.h"
 
 
 using namespace std;
@@ -29,8 +30,8 @@ void toy_test(){
 
     arma::Mat<double> train(N, M),
                       test(N, M);
-    train.load("../train.csv", csv_ascii);
-    test.load("../test.csv", csv_ascii);
+    train.load("../Examples/train.csv", csv_ascii);
+    test.load("../Examples/test.csv", csv_ascii);
 
 //    cout<<arma::approx_equal(train, test, "absdiff", 1e-1)<<endl;
 
@@ -55,16 +56,15 @@ void toy_test(){
     compute_anomaly_score(test, A, m, g_mat, anomaly_score, true);
     auto end = sc.now();
 //    cout<< anomaly_score.is_zero()<<endl;
-
+//    cout<<"K="<<K<<endl;
     anomaly_score.save("anomaly.csv", csv_ascii);
     auto time_span = static_cast<chrono::duration<double>>(end - start);
     cout << "Operation took: " << time_span.count() << " seconds"<<endl;
 }
 
-void real_test(){}
 
 
-    int main() {
+int main() {
 //   blank_test();
    toy_test();
 //    vec q = {};

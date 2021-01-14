@@ -1,5 +1,5 @@
-# Numpy and Pandas integration
-
+# import _sgmrfmix
+import sgmrfmix
 
 class sGMRFmix:
 

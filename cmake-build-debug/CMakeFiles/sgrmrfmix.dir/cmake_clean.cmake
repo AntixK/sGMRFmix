@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sgrmrfmix.dir/src/_sgmrfmix.cpp.o"
   "CMakeFiles/sgrmrfmix.dir/src/test.cpp.o"
   "sgrmrfmix"
   "sgrmrfmix.pdb"

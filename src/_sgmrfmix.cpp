@@ -1,7 +1,11 @@
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 #include <armadillo>
+
+// sGMRFmix headers
 #include "headers/sGMRFmix.h"
+#include "headers/compute_anomaly.h"
 
 /* ---------------------------
  *       C++ Code
