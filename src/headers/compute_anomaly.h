@@ -43,6 +43,7 @@ void compute_anomaly_score(const Mat<double> &X,  // (N x M)
 //    X.print("test=");
 //    g_mat.print("g_mat=");
     // Equation (22) in section 3.3
+    anomaly_score.resize(N, M);
     vec score(N, fill::zeros);
     for(int i=0; i < M; ++i){
         score.fill(0.0);

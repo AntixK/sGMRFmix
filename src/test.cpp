@@ -54,7 +54,7 @@ void toy_test(){
     sGMRFmix(train, K, rho, m0, A, m,  g_mat, false, pi_threshold,1.0, 500, 1e-1, false, 314);
     Mat<double> anomaly_score(N, M, fill::zeros);
     compute_anomaly_score(test, A, m, g_mat, anomaly_score, true);
-//    A.print("A=");
+    A.print("A=");
     auto end = sc.now();
 //    cout<< anomaly_score.is_zero()<<endl;
 //    cout<<"K="<<K<<endl;
