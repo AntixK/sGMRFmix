@@ -66,11 +66,14 @@ class CMakeBuild(build_ext):
         print()  # Add an empty line for cleaner output
 
 requirements = [
-                   'pandas',
                    'numpy',
                ]
 
-test_requirements = ''
+test_requirements = [
+                        'numpy',
+                    ]
+
+long_description = f"Python library for sGMRFmix model for anomaly detection in time-series data. sGMRFmix is short for sparse mixture of Gaussian Markov Random Fields. This is essentially a C++ (and python) port of the R package `sGMRFmix` to make it run faster for larger datasets."
 
 setup(
     name='sgmrfmix',
@@ -79,11 +82,16 @@ setup(
     author_email='anandkrish894@gmail.com',
     url='https://github.com/AntixK/sGMRFmix',
     description='Python library for sparse Gaussian Markov Random Field mixtures for anomaly detection',
-    long_description='',
+    long_description=long_description,
     packages=['sgmrfmix'],
     ext_modules=[CMakeExtension('_sgmrfmix')],
     cmdclass=dict(build_ext=CMakeBuild),
     install_requires=requirements,
     tests_require=test_requirements,
     zip_safe=False,
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
 )

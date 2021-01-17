@@ -5,11 +5,13 @@ sGMRFmix is short for sparse mixture of Gaussian Markov Random Fields.
 This is essentially a C++ (and python) port of the R package [`sGMRFmix`](https://cran.r-project.org/web/packages/sGMRFmix/index.html) to make it run faster for larger datasets.
 
 ## Model Overview
+sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable using the variables in its markov blanket. Lower the log likelihood, higher the anomaly score. The markov blanket is estimated using a Gaussian graphical model with constraint that enforces sparsity in the inverse covariance matrices of the mixture of GMRF model. This can be done in a stright-forward manner using Graphical LASSO model. You can check out the [paper](https://ide-research.net/papers/2016_ICDM_Ide.pdf) for further details and the math.
+  
 ![sGMRFmix Model](https://github.com/AntixK/sGMRFmix/blob/main/assets/model_overview.png)
 
 ## Installation
 
-### Pre-Requisities
+### Build from source
 
 Install the follow dependencies on Ubuntu/Debian using apt.
 ```
@@ -17,13 +19,12 @@ sudo apt install libarmadillo-dev
 sudo apt install libboost-all-dev
 ```
 
-### Build from source
-
-### pip installation
+```$
+$ python setup.py  install
+```
 
 ## Usage
-```python
-
+```$python
 import numpy as np
 from sgmrfmix import sGMRFmix
 
@@ -44,3 +45,4 @@ Check out further examples in the `Examples/` folder.
 - https://rdrr.io/cran/sGMRFmix/f/vignettes/sGMRFmix.Rmd
 - https://cran.r-project.org/web/packages/sGMRFmix/vignettes/sGMRFmix.html
 - https://github.com/cran/sGMRFmix
+- https://github.com/JClavel/glassoFast

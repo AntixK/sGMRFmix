@@ -1,4 +1,6 @@
+LICENSE.md
 README.md
+setup.cfg
 setup.py
 sgmrfmix/__init__.py
 sgmrfmix/model.py
