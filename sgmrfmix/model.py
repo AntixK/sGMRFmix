@@ -67,11 +67,10 @@ class sGMRFmix:
                                       self.model_param['precision_matrices'],
                                       self.model_param['mean_vectors'],
                                       self.model_param['gating_matrix'],
-                                      self.verbose)
+                                      self.verbose)[0]
         return results
 
     def show_model_params(self):
-
         print("sGMRFmix Parameters ==============================")
         for key, val in self.model_param.items():
             print(key + ':')
