@@ -21,7 +21,7 @@ using namespace arma;
 SpMat<double> GLasso (const Mat<double> &S,
                       double alpha,
                       bool verbose = false,
-                      double threshold = 1e-8,
+                      double threshold = 1e-12,
                       int max_iter = 10000){
     int N = S.n_cols;
 

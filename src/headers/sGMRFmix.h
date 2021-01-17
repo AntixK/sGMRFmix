@@ -7,6 +7,7 @@
 
 #endif //SGMRFMIX_H
 
+#include <chrono>
 #include <armadillo>
 #include <cassert>
 #include "sgaussmix.h"
@@ -34,6 +35,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     // For reproducibility
     std::srand (random_seed);
     arma_rng::set_seed(random_seed);
+    std::chrono::steady_clock sc;
 
     int N = X.n_rows,
         M = X.n_cols;
@@ -51,6 +53,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
         std::clog<<termcolor::blue<<"Running sparse Gaussian Mixture Model."<<endl;
     }
 
+    auto start = sc.now();     // start timer
     sparseGaussMix(X, K, rho, m0, pi, Ak, _m, do_kmeans, lambda0, max_iter, tol, verbose);
 
     if(verbose){
@@ -120,14 +123,11 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
 
     // Return Results
     K = new_K;
-
-//    if(verbose){
-//        std::clog<<termcolor::blue<<"Computing anomaly score."<<endl;
-//    }
-
-//    U.print("U=");
-
-//    cout<<anomaly_score;
-    // newp_pi, mode, theta
+    auto end = sc.now();
+    auto time_span = static_cast<std::chrono::duration<double>>(end - start);
+    cout <<termcolor::blue<<"Operation took: " << time_span.count() << " seconds"<<endl;
+    if(verbose){
+        std::clog<<termcolor::blue<<"=================================================="<<endl;
+    }
 
 }

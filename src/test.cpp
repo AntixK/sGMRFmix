@@ -50,7 +50,8 @@ void toy_test(){
     Cube<double> A;
     Mat<double> m;
     Mat<double> g_mat;
-    auto start = sc.now();     // start timer
+    auto start = sc.now();     // start timer    auto start = sc.now();     // start timer
+
     sGMRFmix(train, K, rho, m0, A, m,  g_mat, false, pi_threshold,1.0, 500, 1e-1, false, 314);
     Mat<double> anomaly_score(N, M, fill::zeros);
     compute_anomaly_score(test, A, m, g_mat, anomaly_score, true);

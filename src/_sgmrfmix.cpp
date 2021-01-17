@@ -76,7 +76,7 @@ py::array_t<double> cube_to_arr(arma::cube &cube){
     py::ssize_t strides[3];
     strides[0] = sizeof(double) * cube.n_cols;
     strides[1] = sizeof(double);
-    strides[2] = sizeof(double) * cube.n_slices;
+    strides[2] = sizeof(double) * (cube.n_cols * cube.n_rows);
     auto arr = py::array(py::buffer_info(
             cube.memptr(),                              /* data as contiguous array  */
             sizeof(double),                          /* size of one scalar        */
@@ -144,11 +144,12 @@ py::tuple py_compute_anomaly(
     arma::mat _m = arr_to_mat(m);
     arma::mat _g_mat = arr_to_mat(g_mat);
     arma::cube A_ = arr_to_cube(A);
-//
+
 //    cout<<arma::size(X)<<endl
 //        <<arma::size(_m)<<endl
 //        <<arma::size(_g_mat)<<endl
 //        <<arma::size(A_)<<endl;
+//    A_.print("A=");
     compute_anomaly_score(X, A_, _m, _g_mat, anomaly_score, verbose);
 
     auto anomaly = mat_to_arr(anomaly_score);
@@ -161,5 +162,5 @@ PYBIND11_MODULE(_sgmrfmix, module) {
 module.doc() = "A wrapper module around the sGMRFmix C++ implementation";
 
 module.def("sgmrfmix_fit", &py_sGMRFmix, "Fits a sGMRFmix model for the given data ");
-module.def("compute_anomaly", &py_compute_anomaly, "Computes the anomaly score based on the learnt sGMRFmix model");
+module.def("compute_anomaly_", &py_compute_anomaly, "Computes the anomaly score based on the learnt sGMRFmix model");
 }

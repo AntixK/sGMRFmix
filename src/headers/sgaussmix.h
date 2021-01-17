@@ -168,7 +168,7 @@ void sparseGaussMix(const mat &X, // (N x M)
         r.each_col() /= denom;
 
         // Add small noise for  numerical stability
-        r.for_each( [](mat::elem_type &val) {val += 1e-16; });
+        r.for_each( [](mat::elem_type &val) {val += 1e-31; });
 
         assert(!r.has_nan() && "r has NANs");
 

@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 /home/antixk/Anand/Projects/sGMRFmix/src/headers/compute_anomaly.h
+chrono
+-
 armadillo
 -
 
@@ -23,6 +25,8 @@ boost/math/special_functions/digamma.hpp
 /home/antixk/Anand/Projects/sGMRFmix/src/lib/termcolor.h
 
 /home/antixk/Anand/Projects/sGMRFmix/src/headers/sGMRFmix.h
+chrono
+-
 armadillo
 -
 cassert

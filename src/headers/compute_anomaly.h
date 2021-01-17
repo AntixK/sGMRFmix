@@ -7,6 +7,7 @@
 
 #endif //COMPUTE_ANOMALY_H
 
+#include <chrono>
 #include <armadillo>
 
 using namespace arma;
@@ -23,6 +24,13 @@ void compute_anomaly_score(const Mat<double> &X,  // (N x M)
     Cube<double> U(N, M, K, fill::zeros),
                  W(N, M, K, fill::zeros);
 
+    std::chrono::steady_clock sc;
+
+    if(verbose){
+        std::clog<<termcolor::blue<<"============ Computing anomaly score ============="<<endl;
+    }
+
+    auto start = sc.now();     // start timer
     for(int k=0; k < K; ++k){
         W.slice(k).each_row() = 1/A.slice(k).diag().as_row();
     }
@@ -53,5 +61,11 @@ void compute_anomaly_score(const Mat<double> &X,  // (N x M)
                                             W.slice(k).col(i));
         }
         anomaly_score.col(i) = -log(score);
+    }
+    auto end = sc.now();
+    auto time_span = static_cast<std::chrono::duration<double>>(end - start);
+    cout <<termcolor::blue<<"Operation took: " << time_span.count() << " seconds"<<endl;
+    if(verbose){
+        std::clog<<termcolor::blue<<"=================================================="<<endl;
     }
 }
