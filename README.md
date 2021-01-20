@@ -11,30 +11,42 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 
 ## Installation
 
-### Build from source (Linux)
-Install the follow dependencies on Ubuntu/Debian using apt.
-```
-sudo apt update
-sudo apt install openssh-server libarmadillo-dev libboost-all-dev build-essential
-```
-Clone the repository (including the pybind11 submodule) into a suitable directory
-```
-git clone --recursive git@github.com:AntixK/sGMRFmix.git
-cd sGMRFmix
-```
-Build the C++ files
-```
-cd cmake-build-debug
-cmake ..
-make
-```
-Install requirements and build the library.
-Optionally create a python virtual environment to install the library.
-```
-cd ..
-pip install -r requirements.txt
-python setup.py install
-```
+Binaries
+
+<details><summary>Build from source (Linux)</summary>
+<p>Install the follow dependencies on Ubuntu/Debian using apt.</p>
+<pre>
+  <code>
+    sudo apt update
+    sudo apt install openssh-server libarmadillo-dev libboost-all-dev build-essential
+  </code>
+</pre>
+<p>Clone the repository (including the pybind11 submodule) into a suitable directory</p>
+<pre>
+  <code>
+    git clone --recursive git@github.com:AntixK/sGMRFmix.git
+    cd sGMRFmix
+  </code>
+</pre>
+<p>Build the C++ files</p>
+<pre>
+  <code>
+    cd cmake-build-debug
+    cmake ..
+    make
+  </code>
+</pre>
+<p>Install requirements and build the library.<br>
+   Optionally create a python virtual environment to install the library.</p>
+ <pre>
+   <code>
+     cd ..
+     pip install -r requirements.txt
+     python setup.py install
+   </code>
+ </pre>
+</details>
+
 
 ## Usage
 ```python
