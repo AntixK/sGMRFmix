@@ -1,6 +1,0 @@
-/home/antixk/Anand/softwares/clion-linux/clion-2020.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/antixk/Anand/Projects/sGMRFmix
--- A library with LAPACK API found.
--- pybind11 v2.6.2 dev1
--- Configuring done
--- Generating done
--- Build files have been written to: /home/antixk/Anand/Projects/sGMRFmix/cmake-build-debug

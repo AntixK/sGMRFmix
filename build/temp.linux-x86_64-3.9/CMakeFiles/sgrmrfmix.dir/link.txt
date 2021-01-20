@@ -1,1 +1,0 @@
-/usr/bin/c++  -DVERSION_INFO=\"0.1\" -O3 -DNDEBUG   CMakeFiles/sgrmrfmix.dir/src/test.cpp.o  -o sgrmrfmix  -larmadillo -llapack -lblas -lboost_system 

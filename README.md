@@ -11,26 +11,39 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 
 ## Installation
 
-### Build from source
-
+### Build from source (Linux)
 Install the follow dependencies on Ubuntu/Debian using apt.
 ```
-sudo apt install libarmadillo-dev
-sudo apt install libboost-all-dev
+sudo apt update
+sudo apt install openssh-server libarmadillo-dev libboost-all-dev build-essential
 ```
-
-```$
-$ python setup.py  install
+Clone the repository (including the pybind11 submodule) into a suitable directory
+```
+git clone --recursive git@github.com:AntixK/sGMRFmix.git
+cd sGMRFmix
+```
+Build the C++ files
+```
+cd cmake-build-debug
+cmake ..
+make
+```
+Install requirements and build the library.
+Optionally create a python virtual environment to install the library.
+```
+cd ..
+pip install -r requirements.txt
+python setup.py install
 ```
 
 ## Usage
-```$python
+```python
 import numpy as np
 from sgmrfmix import sGMRFmix
 
 m = sGMRFmix(K = 5, rho=0.8)
-train = np.genfromtxt('../Examples/train.csv', delimiter=',', skip_header=True)[:, 1:]
-test = np.genfromtxt('../Examples/test.csv', delimiter=',', skip_header=True)[:, 1:]
+train = np.genfromtxt('train.csv', delimiter=',', skip_header=True)[:, 1:]
+test = np.genfromtxt('test.csv', delimiter=',', skip_header=True)[:, 1:]
 
 m.fit(train)
 m.show_model_params()
