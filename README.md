@@ -11,7 +11,7 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 
 ## Installation
 
-### Binaries
+Binaries
 
 <details><summary>Build from source (Linux)</summary>
 <p>Install the follow dependencies on Ubuntu/Debian using apt.</p>
