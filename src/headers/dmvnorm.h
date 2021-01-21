@@ -32,8 +32,6 @@ vec dmvnorm(const Mat<double> &x,
     vec log_prob(N);
 
     Mat<double> const rooti = inv(trimatu(chol(sigma)));
-//    rooti.print("rooti=");
-//    Mat<double> const rooti = inv(trimatu(chol(sigma)));
     double rootisum = accu(log(rooti.diag()));
     rootisum += -(double)D/2.0 * log2pi;
 

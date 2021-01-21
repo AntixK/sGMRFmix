@@ -60,9 +60,6 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
         std::clog<<termcolor::blue<<"Completed sparse Gaussian Mixture Model."<<endl;
     }
 
-//    pi.print("pi=");
-//    m.print("m=");
-//    Ak.print("Ak=");
 
     //============================================================================ //
     uvec inds = find(pi >= pi_threshold);
@@ -72,8 +69,6 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     rowvec new_pi(new_K, fill::zeros);
     A.resize(M, M, new_K);
     m.resize(new_K, M);
-//    Cube<double> new_A(M, M, new_K, fill::zeros);
-//    Mat<double> new_m(new_K, M, fill::zeros);
 
     double pi_sum = 0.0;
     for(int k=0; k < new_K; ++k){
@@ -88,7 +83,6 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     for(auto &p : new_pi){
         p /= pi_sum;
     }
-//    new_pi.print("new_pi=");
 
     // Placeholders for GMRF results
     g_mat.resize(N, new_K);
@@ -106,15 +100,12 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
         std::clog<<termcolor::blue<<"Completed sparse GMRF Model."<<endl;
     }
 
-//    g_mat.for_each([](mat::elem_type &val){val = exp(val);}).print("g_mat=");
-//    g_mat.print("g_mat=");
     // ============================================================================ //
     // Compute Mode
     Mat<double> Sigma(M, M),
                 loglik_mat(N, new_K);
 
     for(int k=0; k < new_K; ++k){
-//        Sigma = inv(trimatu(chol(new_A.slice(k))));
         Sigma = inv_sympd(A.slice(k));
         loglik_mat.col(k) = dmvnorm(X, m.row(k), Sigma, true);
     }

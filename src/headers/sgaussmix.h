@@ -86,14 +86,14 @@ void sparseGaussMix(const mat &X, // (N x M)
 
     // Initialize the Mean and Covariance of the GMM
     if (do_kmeans){
-//          kmeans(X, K, 10, verbose);
+
           std::cerr<<termcolor::red<<"Error: K-Means is currently not supported. Set the flag to false."<<endl;
     }
 
     if (!do_kmeans) {
         int i = 0;
         for (int k = 0; k < K; ++k) {
-//            cout<<"("<<i<<","<<i + n_sampl -1<<")"<<endl;
+
             split_X.slice(k) = X.rows(i, i + n_sampl - 1);
             i += n_sampl;
         }
@@ -105,7 +105,7 @@ void sparseGaussMix(const mat &X, // (N x M)
         Sigma.slice(k) = cov(split_X.slice(k));
     }
 
-//    Sigma.print("Sigma=");
+
     Cube<double> Lambda(M, M,  K,fill::zeros),
                  invLambda(M, M, K, fill::zeros),
                  Q(M, M, K, fill::zeros);
@@ -123,12 +123,10 @@ void sparseGaussMix(const mat &X, // (N x M)
         Lambda.slice(k) = GLasso(Sigma.slice(k), 0.1, verbose);            // Precision Matrix
 //        invLambda.slice(k) = inv(trimatu(chol(Lambda.slice(k)))); // Covariance Matrix
         invLambda.slice(k) = inv(Lambda.slice(k)); // Covariance Matrix
-//        to_symmetric(invLambda.slice(k));
 
-//        assert(invLambda.slice(k).is_symmetric() && "Inverse Lambda is not symmetric.");
     }
 
-//    Lambda.print("Lambda=");
+
 
     double loglik = -datum::inf,
            prev_loglik,
@@ -140,11 +138,10 @@ void sparseGaussMix(const mat &X, // (N x M)
     bool has_converged = false;
     while(num_iter < max_iter){
         num_iter++;
-//        cout<<num_iter<<endl;
 
         // Equation (29) in section 4.2
         for (int k = 0; k < K; ++k) {
-//            Lambda.slice(k).print("Lambda[k]=");
+
             ln_r.col(k) = log(pi(k)) + dmvnorm(X,
                                                m.row(k),
                                                invLambda.slice(k), true) - M / (2 * lambda(k));
@@ -152,12 +149,10 @@ void sparseGaussMix(const mat &X, // (N x M)
         assert(!ln_r.has_nan() && "ln_r has NANs");
 
 
-//        ln_r.print("ln_r =");
 
         // Equation (30) in section 4.2 (Softmax)
         // We use log-sum-exp method to prevent numerical overflows
         max_ln_r = max(ln_r, 1); // Max value of each row (N x 1)
-//        cout<<size(max_ln_r)<<endl;
         for (int k=0; k < K; ++k) {
             r.col(k) = exp(ln_r.col(k) - max_ln_r);
         }
@@ -172,15 +167,13 @@ void sparseGaussMix(const mat &X, // (N x M)
 
         assert(!r.has_nan() && "r has NANs");
 
-//        r.print("r=");
+
         //Equation (31) in section 4.2
         rowvec Nk = sum(r, 0); // Sum the columns
         pi = Nk/N;
         assert(!Nk.has_nan() && "Nk has NANs");
         assert(!pi.has_nan() && "pi has NANs");
 
-//        pi.print();
-//        Nk.print("Nk=");
 
         // Equation (32) in section 4.2
         for(int k=0; k < K; ++k){
@@ -188,31 +181,23 @@ void sparseGaussMix(const mat &X, // (N x M)
         }
 
         assert(!x_bar.has_nan() && "x_bar has NANs");
-//        x_bar.print("x_bar=");
+
         // Equation (33) in section 4.2
         for(int k = 0; k < K; ++k){
             tmp = (X.each_row() - x_bar.row(k)); // NxM
             tmp = tmp.each_col() % sqrt(r.col(k));
             Sigma.slice(k) = (tmp.t() * tmp) / Nk(k); // MxM
 
-//            for(int i = 0; i < N; ++i){
-//                Sigma.slice(k) += r(i, k) / Nk(k) * (tmp.row(i).t() * tmp.row(i)); // MxM
-//            }
-//            assert(Sigma.slice(k).is_sympd() && "Sigma is not SPD.");
-
         }
         assert(!Sigma.has_nan() && "Sigma has NANs");
 
-//        Sigma.print("Sigma=");
 
         // Equation (34) in section 4.2
         lambda = lambda0 + Nk;
         for (int k=0; k < K; ++k){
             m.row(k) = (lambda0 * m0 + Nk(k)*x_bar.row(k))/lambda(k);
         }
-//        m.print("m=");
-//        lambda.print("lambda=");
-//        cout<<lambda0<<"  "<<m0;
+
         // Equation (35) in section 4.2
         for(int k=0; k < K; ++k){
             tmp_row = (x_bar.row(k) - m0); // 1xM
@@ -222,8 +207,6 @@ void sparseGaussMix(const mat &X, // (N x M)
 
         }
         assert(!Q.has_nan() && "Q has NANs");
-
-//        Q.print("Q=");
 
         // Equation (36) in section 4.2
         // Notice that the equation (36) is simply the
@@ -245,17 +228,11 @@ void sparseGaussMix(const mat &X, // (N x M)
         assert(!Lambda.has_nan() && "Lambda has NANs");
         assert(!invLambda.has_nan() && "invLambda has NANs");
 
-
-//        invLambda.print("invLambda=");
-
         prev_loglik = loglik;
         loglik = compute_loglik(X, m, m0, r, pi, Lambda, invLambda, loglik_mat, rho, lambda0, N, K);
 
-//        assert(loglik == loglik && "Likelihood computation resulted in NAN.");
         // Check for convergence
         dloglik = std::abs(loglik - prev_loglik);
-//        cout<<loglik<<" "<<prev_loglik<<endl;
-
 
         if (dloglik < tol && is_finite(dloglik)){
             has_converged = true;
@@ -277,13 +254,6 @@ void sparseGaussMix(const mat &X, // (N x M)
     for(int k=0; k < K; ++k){
         Ak.slice(k) = lambda(k)/(1 + lambda(k)) * Lambda.slice(k);
     }
-
-//    pi.print("pi=");
-//    Ak.print("Ak=");
-    // Sanity check
-//    cout<<"Ak:"<<Ak.has_nan()
-//        <<"pi:"<<pi.has_nan()
-//        <<"m:"<<m.has_nan()<<endl;
 }
 
 double compute_loglik(const Mat<double> &X,
@@ -310,7 +280,6 @@ double compute_loglik(const Mat<double> &X,
         gauss_laplace_prior_lik += -rho * compute_L1_norm(Lambda.slice(k)) / 2.0;
         gauss_laplace_prior_lik += accu(dmvnorm(m.row(k), m0, invLambda.slice(k) / lambda0, true));
     }
-//    cout<<gauss_laplace_prior_lik<<endl;
 
     // Equation (25) in section 4.1
     for(auto& ind : max_inds){

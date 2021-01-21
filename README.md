@@ -11,7 +11,12 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 
 ## Installation
 
-Binaries
+### Requirements
+- Python >= 3.6
+- Numpy >= 1.14.5
+
+### Binaries
+Check out the releases of this repo.
 
 <details><summary>Build from source (Linux)</summary>
 <p>Install the follow dependencies on Ubuntu/Debian using apt.</p>
