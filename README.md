@@ -16,42 +16,41 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 - Numpy >= 1.14.5
 
 ### Binaries
-Check out the releases of this repo.
+Before installing the wheels, install the following libraries-
+```
+sudo apt update
+sudo apt install libarmadillo-dev libboost-all-dev
+```
+Check out the releases of this repo for wheels for various platforms.
+Install the wheel using pip inside your python environment.
+```
+pip install sgmrfmix-<platform/other tags>.whl
+```
 
-<details><summary>Build from source (Linux)</summary>
-<p>Install the follow dependencies on Ubuntu/Debian using apt.</p>
-<pre>
-  <code>
-    sudo apt update
-    sudo apt install openssh-server libarmadillo-dev libboost-all-dev build-essential
-  </code>
-</pre>
-<p>Clone the repository (including the pybind11 submodule) into a suitable directory</p>
-<pre>
-  <code>
-    git clone --recursive git@github.com:AntixK/sGMRFmix.git
-    cd sGMRFmix
-  </code>
-</pre>
-<p>Build the C++ files</p>
-<pre>
-  <code>
-    cd cmake-build-debug
-    cmake ..
-    make
-  </code>
-</pre>
-<p>Install requirements and build the library.<br>
-   Optionally create a python virtual environment to install the library.</p>
- <pre>
-   <code>
-     cd ..
-     pip install -r requirements.txt
-     python setup.py install
-   </code>
- </pre>
-</details>
-
+### Build from source
+Install the follow dependencies on Ubuntu/Debian using apt (or any method suitable to your platform).
+```
+sudo apt update
+sudo apt install libarmadillo-dev libboost-all-dev build-essential
+```
+Clone the repository (including the pybind11 submodule) into a suitable directory
+```
+git clone --recursive git@github.com:AntixK/sGMRFmix.git
+cd sGMRFmix
+```
+Build the C++ files
+```
+cd cmake-build-debug
+cmake ..
+make
+```
+Install requirements and build the library.
+Optionally create a python virtual environment to install the library.
+```
+cd ..
+pip install -r requirements.txt
+python setup.py install
+```
 
 ## Usage
 ```python
