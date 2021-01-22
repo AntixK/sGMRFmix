@@ -30,8 +30,8 @@ void toy_test(){
 
     arma::Mat<double> train(N, M),
                       test(N, M);
-    train.load("../Examples/train.csv", csv_ascii);
-    test.load("../Examples/test.csv", csv_ascii);
+    train.load("../Examples/Data/train.csv", csv_ascii);
+    test.load("../Examples/Data/test.csv", csv_ascii);
 
 //    cout<<arma::approx_equal(train, test, "absdiff", 1e-1)<<endl;
 

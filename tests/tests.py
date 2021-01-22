@@ -5,8 +5,8 @@ from sgmrfmix import sGMRFmix
 class TestsGMRFmix(unittest.TestCase):
     def setUp(self) -> None:
         self.m = sGMRFmix(K=5, rho=0.8)
-        self.train = np.genfromtxt('../Examples/train.csv', delimiter=',', skip_header=True)[:, 1:]
-        self.test = np.genfromtxt('../Examples/test.csv', delimiter=',', skip_header=True)[:, 1:]
+        self.train = np.genfromtxt('../Examples/Data/train.csv', delimiter=',', skip_header=True)[:, 1:]
+        self.test = np.genfromtxt('../Examples/Data/test.csv', delimiter=',', skip_header=True)[:, 1:]
 
     def test_model(self):
         # print(train.shape, test.shape)
