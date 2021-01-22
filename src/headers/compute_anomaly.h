@@ -34,10 +34,6 @@ void compute_anomaly_score(const Mat<double> &X,  // (N x M)
     for(int k=0; k < K; ++k){
         W.slice(k).each_row() = 1/A.slice(k).diag().as_row();
     }
-//    W.print("W=");
-//    m.print("m=");
-//    A.print("A=");
-
 
     Cube<double> tmp(N, M, K, fill::zeros);
     for (int  k=0; k < K; ++k) {
@@ -47,9 +43,7 @@ void compute_anomaly_score(const Mat<double> &X,  // (N x M)
             U.slice(k).col(i) = X.col(i) - (tmp.slice(k).col(i) / A(i, i, k));
         }
     }
-//    U.print("U=");
-//    X.print("test=");
-//    g_mat.print("g_mat=");
+
     // Equation (22) in section 3.3
     anomaly_score.resize(N, M);
     vec score(N, fill::zeros);

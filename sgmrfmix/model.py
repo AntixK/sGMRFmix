@@ -22,7 +22,7 @@ class sGMRFmix:
         self.random_seed = random_seed
         self.verbose = verbose
         np.random.seed(random_seed)
-        np.printoptions(precision=2, supress=True)
+        # np.printoptions(precision=2, supress=True)
 
         self.m0 = m0
         self.do_kmeans = False

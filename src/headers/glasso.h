@@ -1,7 +1,3 @@
-//
-// Created by antixk on 09/12/20.
-//
-
 #ifndef GLASSO_H
 #define GLASSO_H
 
@@ -27,11 +23,7 @@ SpMat<double> GLasso (const Mat<double> &S,
 
     Mat<double> L(N, N);
     L.fill(alpha);
-//    Mat<double> L(N, N, fill::eye);
-//    L *= alpha;
 
-
-//    S.print("S=");
     double eps = 1e-16;
     double lasso_thresh;
     double convergence_thresh = accu(abs(S));

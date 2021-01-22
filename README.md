@@ -11,42 +11,54 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 
 ## Installation
 
-Binaries
+### Requirements
+- Python >= 3.7 (For Python Thread-Specific-Storage (TSS) API used by pybind11)
+- Numpy >= 1.16.5
+- Armadillo and Boost libraries. (Use the following commands for linux and mac)
+```
+sudo apt update
+sudo apt install libarmadillo-dev libboost-all-dev build-essential
+```
 
-<details><summary>Build from source (Linux)</summary>
-<p>Install the follow dependencies on Ubuntu/Debian using apt.</p>
-<pre>
-  <code>
-    sudo apt update
-    sudo apt install openssh-server libarmadillo-dev libboost-all-dev build-essential
-  </code>
-</pre>
-<p>Clone the repository (including the pybind11 submodule) into a suitable directory</p>
-<pre>
-  <code>
-    git clone --recursive git@github.com:AntixK/sGMRFmix.git
-    cd sGMRFmix
-  </code>
-</pre>
-<p>Build the C++ files</p>
-<pre>
-  <code>
-    cd cmake-build-debug
-    cmake ..
-    make
-  </code>
-</pre>
-<p>Install requirements and build the library.<br>
-   Optionally create a python virtual environment to install the library.</p>
- <pre>
-   <code>
-     cd ..
-     pip install -r requirements.txt
-     python setup.py install
-   </code>
- </pre>
-</details>
+For Mac
+```
+brew install armadillo 
+brew install boost
+```
 
+### Binaries
+Before installing the wheels, install the following libraries-
+```
+sudo apt update
+sudo apt install libarmadillo-dev libboost-all-dev
+```
+Check out the releases of this repo for wheels for various platforms.
+Install the wheel using pip inside your python environment.
+```
+pip install sgmrfmix-<platform/other tags>.whl
+```
+
+
+### Build from source
+
+Clone the repository (including the pybind11 submodule) into a suitable directory
+```
+git clone --recursive git@github.com:AntixK/sGMRFmix.git
+cd sGMRFmix
+```
+Build the C++ files
+```
+cd cmake-build-debug
+cmake ..
+make
+```
+Install requirements and build the library.
+Optionally create a python virtual environment to install the library.
+```
+cd ..
+pip install -r requirements.txt
+python setup.py install
+```
 
 ## Usage
 ```python

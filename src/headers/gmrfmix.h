@@ -8,11 +8,7 @@
 #endif //GMRFMIX_H
 
 #include <boost/math/special_functions/digamma.hpp>
-//#include <boost/math/special_functions/gamma.hpp>
 #include "../lib/termcolor.h"
-
-
-//using namespace arma;
 
 
 void GMRFmix( const Mat<double> &X, // (N, M)
@@ -38,8 +34,6 @@ void GMRFmix( const Mat<double> &X, // (N, M)
         W.slice(k).each_row() = 1/A.slice(k).diag().as_row();
     }
 
-//    W.print("W=");
-
     Cube<double> tmp(N, M, K, fill::zeros);
     for (int  k=0; k < K; ++k) {
         tmp.slice(k) = (X.each_row() - m.row(k)) * A.slice(k);
@@ -48,7 +42,7 @@ void GMRFmix( const Mat<double> &X, // (N, M)
             U.slice(k).col(i) = X.col(i) - (tmp.slice(k).col(i) / A(i, i, k));
         }
     }
-//    U.print("U=");
+
     Mat<double> g_unnorm(N, K, fill::zeros);
 
     double loglik = -datum::inf,
@@ -73,24 +67,24 @@ void GMRFmix( const Mat<double> &X, // (N, M)
         for(int k=0; k < K; ++k){
             Nk(k) = pi(k) * N;
         }
-//        Nk.print("Nk");
+
         int num_iter = 0;
         bool has_converged = false;
         while(num_iter < max_iter){
             num_iter++;
             // Iterate over all K
             a = alpha + Nk;
-//            cout<<alpha<<endl;
+
 
             // Equation (16) in section 3.2 (We take log for numerical stability)
             a_bar = sum(a);
 
-//            a.print("a=");
+
             for(int k = 0; k < K; ++k) {
                 theta(k) = exp(boost::math::digamma(a(k)) -
                                boost::math::digamma(a_bar));  // Log theta
             }
-//            theta.print("Theta=");
+
 
             // Compute the Gating function (Posterior Distribution)
             // Equation (17) in section 3.2
@@ -102,9 +96,7 @@ void GMRFmix( const Mat<double> &X, // (N, M)
             }
             vec denom = sum(g_mat, 1); // Sum each row
             g_mat.each_col() /= (denom + 1e-8);
-//
-//            cout<<g_unnorm.has_nan()<<endl;
-//            cout<<g_mat.has_nan()<<endl;
+
 
             // Equation (18)
             Nk = sum(g_mat, 0); // Sum each column
@@ -119,10 +111,7 @@ void GMRFmix( const Mat<double> &X, // (N, M)
 
             loglik += accu(lgamma(alpha) + (alpha - 1.0) % log(theta));
 
-//            for(int k = 0; k < K; ++k){
-//                loglik += boost::math::lgamma(alpha(k)) + (alpha(k) - 1) * log(theta(k));
-//            }
-//            cout<<loglik<<endl;
+
             delta_loglik = abs(loglik - prev_loglik);
 
             if(delta_loglik < tol && is_finite(delta_loglik)){
