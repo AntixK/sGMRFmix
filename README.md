@@ -1,5 +1,7 @@
 # sGMRFmix
 
+[![Build Status](https://travis-ci.com/AntixK/sGMRFmix.svg?branch=dev)](https://travis-ci.com/AntixK/sGMRFmix)
+
 Python library for sGMRFmix model for anomaly detection in time-series data.
 sGMRFmix is short for sparse mixture of Gaussian Markov Random Fields.
 This is essentially a C++ (and python) port of the R package [`sGMRFmix`](https://cran.r-project.org/web/packages/sGMRFmix/index.html) to make it run faster for larger datasets.
