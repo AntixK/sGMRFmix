@@ -73,7 +73,7 @@ test_requirements = [
                         'numpy>=1.16.5',
                     ]
 
-long_description = f"Python library for sGMRFmix model for anomaly detection in time-series data. sGMRFmix is short for sparse mixture of Gaussian Markov Random Fields. This is essentially a C++ (and python) port of the R package `sGMRFmix` to make it run faster for larger datasets."
+long_description = "Python library for sGMRFmix model for anomaly detection in time-series data. sGMRFmix is short for sparse mixture of Gaussian Markov Random Fields. This is essentially a C++ (and python) port of the R package `sGMRFmix` to make it run faster for larger datasets."
 
 setup(
     name='sgmrfmix',

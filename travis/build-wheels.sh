@@ -15,9 +15,14 @@ function repair_wheel {
 
 # Compile wheels
 for PYBIN in /opt/python/cp3*/bin; do
-    "${PYBIN}/pip" install -r /io/requirements.txt
-    "${PYBIN}/pip" wheel /io/ -w wheelhouse/
-    "${PYBIN}/python" /io/setup.py sdist -d /io/wheelhouse/
+    VER=$(echo $PYBIN| cut -b 16)   # Get the python version
+    if [ $VER -gt 6 ]
+    then
+        "${PYBIN}/pip" install -r /io/requirements.txt
+        "${PYBIN}/pip" wheel /io/ -w wheelhouse/
+        "${PYBIN}/python" /io/setup.py sdist -d /io/wheelhouse/
+    fi
+    
 done
 
 # Bundle external shared libraries into the wheels
@@ -27,7 +32,11 @@ done
 
 # Install packages and test
 for PYBIN in /opt/python/cp3*/bin/; do
-    "${PYBIN}/pip" install -r /io/requirements.txt
-    "${PYBIN}/pip" install --no-index -f /io/wheelhouse sgmrfmix
-    (cd "$PYHOME"; "${PYBIN}/unittest" /io/tests/)
+    VER=$(echo $PYBIN| cut -b 16)   # Get the python version
+    if [ $VER -gt 6 ]
+    then
+        "${PYBIN}/pip" install -r /io/requirements.txt
+        "${PYBIN}/pip" install --no-index -f /io/wheelhouse sgmrfmix
+        (cd "$PYHOME"; "${PYBIN}/unittest" /io/tests/)
+    fi
 done
