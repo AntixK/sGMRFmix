@@ -35,6 +35,7 @@ include_directories("${PROJECT_SOURCE_DIR}/")
 pybind11_add_module(_sgmrfmix src/_sgmrfmix.cpp ${SOURCE_FILES})
 
 # Only include CPP file that has the main() function
+#add_executable(sgrmrfmix src/test.cpp ${SOURCE_FILES})
 add_executable(sgrmrfmix src/test.cpp ${SOURCE_FILES})
 #target_include_directories(sgrmrfmix PRIVATE ${PYTHON_INCLUDE_DIRS} src/)
 target_link_libraries(_sgmrfmix PRIVATE)
