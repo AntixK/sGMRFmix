@@ -10,6 +10,8 @@ function repair_wheel {
     fi
 }
 
+/opt/python/cp37-cp37m/bin/pip install twine cmake
+ln -s /opt/python/cp37-cp37m/bin/cmake /usr/bin/cmake
 
 # Install a system package required by our library
 
