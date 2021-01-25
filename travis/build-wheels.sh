@@ -13,12 +13,13 @@ function repair_wheel {
 /opt/python/cp37-cp37m/bin/pip install twine cmake
 ln -s /opt/python/cp37-cp37m/bin/cmake /usr/bin/cmake
 
+
 # Install a system package required by our library
 
 # Compile wheels
 for PYBIN in /opt/python/cp3*/bin; do
     VER=$(echo $PYBIN| cut -b 16)   # Get the python version
-    if [ $VER -gt 6 ]
+    if [ $VER -gt 6 ]               # Build only for python verion greater than 3.6
     then
         "${PYBIN}/pip" install -r /io/requirements.txt
         "${PYBIN}/pip" wheel /io/ -w wheelhouse/

@@ -1,5 +1,3 @@
-language: cpp
-
 notifications:
   email: false
 
