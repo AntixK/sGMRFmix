@@ -4,8 +4,6 @@ notifications:
 before_install:
  - chmod +x io/travis/build-wheels.sh
 
-if: tag IS present
-
 matrix:
   include:
   - sudo: required
