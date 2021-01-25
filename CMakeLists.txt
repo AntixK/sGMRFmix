@@ -10,6 +10,7 @@ project(sgrmrfmix)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_BUILD_TYPE Release)
 
 #find_package(PythonLibs 3 REQUIRED) (This may cause pybyind11 to use a different python version than the current interpreter)
 find_package(Boost REQUIRED)
