@@ -2,7 +2,7 @@ notifications:
   email: false
 
 before_install:
- - sudo chmod +x io/travis/build-wheels.sh
+ - sudo chmod +x /io/travis/build-wheels.sh
 
 matrix:
   include:
