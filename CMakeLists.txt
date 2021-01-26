@@ -9,8 +9,9 @@ cmake_minimum_required(VERSION 3.16)
 project(sgrmrfmix)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_BUILD_TYPE Release)
+#set(PYBIND11_CPP_STANDARD -std=c++1y)
 
 #find_package(PythonLibs 3 REQUIRED) (This may cause pybyind11 to use a different python version than the current interpreter)
 find_package(Boost REQUIRED)
