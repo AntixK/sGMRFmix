@@ -68,7 +68,9 @@ void toy_test(){
 
 int main() {
 //   blank_test();
-   toy_test();
+//   toy_test();
+    arma::arma_version ver;
+    cout << "ARMA version: "<< ver.as_string() << std::endl;
 //    vec q = {};
 //    arma::mat M1 = {{  0.2821,   0.3611,  -0.1907,  -0.1455,  -0.2434},
 //                    { 0.3611,   0.6788,  -0.1226,  -0.4604,  -0.1754},
