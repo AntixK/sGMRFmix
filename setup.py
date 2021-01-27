@@ -3,7 +3,6 @@ import re
 import sys
 import platform
 import subprocess
-import sgmrfmix
 from distutils.version import LooseVersion
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
@@ -77,7 +76,7 @@ long_description = "Python library for sGMRFmix model for anomaly detection in t
 
 setup(
     name='sgmrfmix',
-    version=sgmrfmix.__version__,
+    version='0.1',
     author='Anand K Subramanian',
     author_email='anandkrish894@gmail.com',
     url='https://github.com/AntixK/sGMRFmix',
