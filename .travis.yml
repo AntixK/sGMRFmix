@@ -1,30 +1,33 @@
-notifications:
-  email: false
+language: python
 
-  # if: tag IS present
-# before_install:
-#   - chmod +x /io/travis/build-wheels.sh
-
-matrix:
+jobs:
   include:
-  - sudo: required
-    services:
-      - docker
-    env:
-      - DOCKER_IMAGE=quay.io/pypa/manylinux2014_x86_64
-      - PLAT=manylinux2014_x86_64
-  - sudo: required
-    services:
-      - docker
-    env:
-      - DOCKER_IMAGE=quay.io/pypa/manylinux2014_i686
-      - PRE_CMD=linux32
-      - PLAT=manylinux2014_i686
+    # perform a linux build
+    - services: docker
+    # perform a linux ARMv8 build
+    - services: docker
+      arch: arm64
+    # perform a linux PPC64LE build
+    - services: docker
+      arch: ppc64le
+    # perform a linux S390X build
+    - services: docker
+      arch: s390x
+    # and a mac build
+    - os: osx
+      language: shell
+    # and a windows build
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.7.0
+        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+        # make sure it's on PATH as 'python3'
+        - ln -s /c/Python37/python.exe /c/Python37/python3.exe
 
 install:
-  - docker pull $DOCKER_IMAGE
+  - python3 -m pip install cibuildwheel==1.9.0
 
 script:
-  - docker run --rm -e PLAT=$PLAT -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/travis/build-wheels.sh
-  - ls wheelhouse/
-
+  # build the wheels, put them into './wheelhouse'
+  - python3 -m cibuildwheel --output-dir wheelhouse
