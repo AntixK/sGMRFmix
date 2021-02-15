@@ -46,7 +46,7 @@ cd sGMRFmix
 ```
 Build the C++ files
 ```
-cd cmake-build-debug
+cd build
 cmake ..
 make
 ```
