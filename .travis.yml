@@ -11,15 +11,15 @@ matrix:
     services:
       - docker
     env:
-      - DOCKER_IMAGE=quay.io/pypa/manylinux2014_x86_64
-      - PLAT=manylinux2014_x86_64
+      - DOCKER_IMAGE=quay.io/pypa/manylinux_2_24_x86_64
+      - PLAT=manylinux_2_24_x86_64
   - sudo: required
     services:
       - docker
     env:
-      - DOCKER_IMAGE=quay.io/pypa/manylinux2014_i686
+      - DOCKER_IMAGE=quay.io/pypa/manylinux_2_24_i686
       - PRE_CMD=linux32
-      - PLAT=manylinux2014_i686
+      - PLAT=manylinux_2_24_i686
 
 install:
   - docker pull $DOCKER_IMAGE
