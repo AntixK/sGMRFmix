@@ -94,5 +94,5 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering",
     ],
-    python_requires='>=3.7', # For Python thread specific storage API
+    python_requires='>=3.6', # For Python thread specific storage API
 )
