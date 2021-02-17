@@ -20,6 +20,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     apt-get install -qq libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev 
     apt-get install -qq libboost-all-dev build-essential
 
+    ## Build Armadillo 
+    wget 'http://sourceforge.net/projects/arma/files/armadillo-10.2.1.tar.xz' && tar xf armadillo-10.2.1.tar.xz && cd armadillo-10.2.1
+    cmake . && make %% make install && cd ..
+
     # if [[ -f /etc/lsb-release ]];then
     #     apt-get update -qq
     #     apt-get install -qq libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev 
