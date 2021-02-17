@@ -5,11 +5,13 @@
 # All rights reserved. Use of this source code is governed by the
 # MIT license that can be found in the LICENSE file.
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.10)
 project(sgrmrfmix)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_BUILD_TYPE Release)
+#set(PYBIND11_CPP_STANDARD -std=c++1y)
 
 #find_package(PythonLibs 3 REQUIRED) (This may cause pybyind11 to use a different python version than the current interpreter)
 find_package(Boost REQUIRED)
@@ -35,7 +37,8 @@ include_directories("${PROJECT_SOURCE_DIR}/")
 pybind11_add_module(_sgmrfmix src/_sgmrfmix.cpp ${SOURCE_FILES})
 
 # Only include CPP file that has the main() function
-add_executable(sgrmrfmix src/test.cpp ${SOURCE_FILES})
+#add_executable(sgrmrfmix src/test.cpp ${SOURCE_FILES})
+#add_executable(sgrmrfmix src/test.cpp ${SOURCE_FILES})
 #target_include_directories(sgrmrfmix PRIVATE ${PYTHON_INCLUDE_DIRS} src/)
 target_link_libraries(_sgmrfmix PRIVATE)
 

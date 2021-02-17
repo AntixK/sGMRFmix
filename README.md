@@ -1,5 +1,7 @@
 # sGMRFmix
 
+[![Build Status](https://travis-ci.com/AntixK/sGMRFmix.svg?branch=dev)](https://travis-ci.com/AntixK/sGMRFmix)
+
 Python library for sGMRFmix model for anomaly detection in time-series data.
 sGMRFmix is short for sparse mixture of Gaussian Markov Random Fields.
 This is essentially a C++ (and python) port of the R package [`sGMRFmix`](https://cran.r-project.org/web/packages/sGMRFmix/index.html) to make it run faster for larger datasets.
@@ -12,26 +14,10 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 ## Installation
 
 ### Requirements
-- Python >= 3.7 (For Python Thread-Specific-Storage (TSS) API used by pybind11)
+- Python >= 3.6 (For Python Thread-Specific-Storage (TSS) API used by pybind11)
 - Numpy >= 1.16.5
-- Armadillo and Boost libraries. (Use the following commands for linux and mac)
-```
-sudo apt update
-sudo apt install libarmadillo-dev libboost-all-dev build-essential
-```
-
-For Mac
-```
-brew install armadillo 
-brew install boost
-```
 
 ### Binaries
-Before installing the wheels, install the following libraries-
-```
-sudo apt update
-sudo apt install libarmadillo-dev libboost-all-dev
-```
 Check out the releases of this repo for wheels for various platforms.
 Install the wheel using pip inside your python environment.
 ```
@@ -40,6 +26,18 @@ pip install sgmrfmix-<platform/other tags>.whl
 
 
 ### Build from source
+For Linux
+```
+sudo apt-get update
+sudo apt-get install libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
+sudo apt install libarmadillo-dev libboost-all-dev build-essential
+```
+
+For Mac
+```
+brew install cmake pkg-config boost openblas 
+brew install armadillo 
+```
 
 Clone the repository (including the pybind11 submodule) into a suitable directory
 ```
@@ -48,7 +46,7 @@ cd sGMRFmix
 ```
 Build the C++ files
 ```
-cd cmake-build-debug
+cd build
 cmake ..
 make
 ```
@@ -58,7 +56,10 @@ Optionally create a python virtual environment to install the library.
 cd ..
 pip install -r requirements.txt
 python setup.py install
-```
+
+pip install auditwheel
+auditwheel show dist/sgmrfmix-0.1-cp37-cp37m-linux_x86_64.whl
+auditwheel repair --plat linux_x86_64  dist/sgmrfmix-0.1-cp37-cp37m-linux_x86_64.whl
 
 ## Usage
 ```python
