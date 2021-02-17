@@ -21,6 +21,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     apt-get install -qq libboost-all-dev build-essential
 
     ## Build Armadillo 
+    apt-get install wget
     wget 'http://sourceforge.net/projects/arma/files/armadillo-10.2.1.tar.xz' && tar xf armadillo-10.2.1.tar.xz && cd armadillo-10.2.1
     cmake . && make %% make install && cd ..
 
