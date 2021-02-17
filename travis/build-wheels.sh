@@ -67,6 +67,7 @@ for PYBIN in /opt/python/cp3*/bin/; do
     then
         "${PYBIN}/pip" install -r /io/requirements.txt
         "${PYBIN}/pip" install --no-index -f /io/wheelhouse sgmrfmix
-        (cd "$PYHOME"; "${PYBIN}/unittest" /io/tests/)
+        "${PYBIN}/python" /io/tests/tests.py
+        # (cd "$PYHOME"; "${PYBIN}/unittest" /io/tests/)
     fi
 done
