@@ -16,20 +16,6 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 ### Requirements
 - Python >= 3.6 (For Python Thread-Specific-Storage (TSS) API used by pybind11)
 - Numpy >= 1.16.5
-- Armadillo and Boost libraries. (Use the following commands)
-
-For Linux
-```
-sudo apt-get update
-sudo apt-get install libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
-sudo apt install libarmadillo-dev libboost-all-dev build-essential
-```
-
-For Mac
-```
-brew install armadillo 
-brew install boost
-```
 
 ### Binaries
 Check out the releases of this repo for wheels for various platforms.
@@ -40,6 +26,18 @@ pip install sgmrfmix-<platform/other tags>.whl
 
 
 ### Build from source
+For Linux
+```
+sudo apt-get update
+sudo apt-get install libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
+sudo apt install libarmadillo-dev libboost-all-dev build-essential
+```
+
+For Mac
+```
+brew install cmake pkg-config boost openblas 
+brew install armadillo 
+```
 
 Clone the repository (including the pybind11 submodule) into a suitable directory
 ```
