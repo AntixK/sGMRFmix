@@ -22,8 +22,9 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
     ## Build Armadillo 
     apt-get install wget
-    wget 'http://sourceforge.net/projects/arma/files/armadillo-10.2.1.tar.xz' && tar xf armadillo-10.2.1.tar.xz && cd armadillo-10.2.1
-    cmake . && make %% make install && cd ..
+    wget 'http://sourceforge.net/projects/arma/files/armadillo-10.2.1.tar.xz' -P /home/ 
+    cd /home/ && tar xf armadillo-10.2.1.tar.xz && cd armadillo-10.2.1
+    cmake . && make && make install && cd /io/
 
     # if [[ -f /etc/lsb-release ]];then
     #     apt-get update -qq
@@ -42,9 +43,14 @@ for PYBIN in /opt/python/cp3*/bin; do
     VER=$(echo $PYBIN| cut -b 16)   # Get the python version
     if [ $VER -gt 5 ]               # Build only for python verion greater than 3.6
     then
+        rm -rf build/ && mkdir build/
+        cd /io/build/ && cmake clean && cmake .. && make && cd /io/
         "${PYBIN}/pip" install -r /io/requirements.txt
         "${PYBIN}/pip" wheel /io/ -w wheelhouse/
+        cd /io/
         "${PYBIN}/python" /io/setup.py sdist -d /io/wheelhouse/
+        "${PYBIN}/python" /io/setup.py bdist_wheel -d /io/wheelhouse/
+
     fi
     
 done
