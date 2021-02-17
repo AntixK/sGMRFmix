@@ -17,6 +17,7 @@ function repair_wheel {
 # Install a system package required by our library
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     if [[ -f /etc/lsb-release ]];then
+        echo "hi"
         apt-get update -qq
         apt-get install -qq libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev 
         apt-get install -qq libboost-all-dev build-essential
