@@ -5,7 +5,7 @@
 # All rights reserved. Use of this source code is governed by the
 # MIT license that can be found in the LICENSE file.
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.10)
 project(sgrmrfmix)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)

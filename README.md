@@ -14,7 +14,7 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
 ## Installation
 
 ### Requirements
-- Python >= 3.7 (For Python Thread-Specific-Storage (TSS) API used by pybind11)
+- Python >= 3.6 (For Python Thread-Specific-Storage (TSS) API used by pybind11)
 - Numpy >= 1.16.5
 - Armadillo and Boost libraries. (Use the following commands)
 
