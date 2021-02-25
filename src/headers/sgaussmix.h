@@ -38,7 +38,7 @@
 #include "glasso.h"
 #include <cmath>
 #include "../lib/termcolor.h"
-
+//#include "../lib/progressbar.hpp"
 
 using namespace arma;
 
@@ -131,14 +131,18 @@ void sparseGaussMix(const mat &X, // (N x M)
     double loglik = -datum::inf,
            prev_loglik,
            dloglik = 0.0;
-    int num_iter = 0;
 //    X.print("X=");
 //    m.print("m=");
 //    Lambda.print("Lambda=");
     bool has_converged = false;
-    while(num_iter < max_iter){
-        num_iter++;
+//    progressbar bar(max_iter);
 
+    int num_iter = 0;
+//    while(num_iter < max_iter){
+    for(num_iter = 0; num_iter < max_iter; ++num_iter){
+//        num_iter++;
+//        bar.update();
+//    for(int num_iter : tqdm::range(max_iter)){
         // Equation (29) in section 4.2
         for (int k = 0; k < K; ++k) {
 
@@ -181,6 +185,7 @@ void sparseGaussMix(const mat &X, // (N x M)
         }
 
         assert(!x_bar.has_nan() && "x_bar has NANs");
+//        std::cout<<termcolor::green<<"Computing Sigma"<<endl;
 
         // Equation (33) in section 4.2
         for(int k = 0; k < K; ++k){
@@ -198,6 +203,8 @@ void sparseGaussMix(const mat &X, // (N x M)
             m.row(k) = (lambda0 * m0 + Nk(k)*x_bar.row(k))/lambda(k);
         }
 
+//        std::cout<<termcolor::green<<"Computing Q"<<endl;
+
         // Equation (35) in section 4.2
         for(int k=0; k < K; ++k){
             tmp_row = (x_bar.row(k) - m0); // 1xM
@@ -213,15 +220,22 @@ void sparseGaussMix(const mat &X, // (N x M)
         // L1 penalized likelihood of the Graphical LASSO objective. So,
         // we can directly employ the Graphical LASSO for each k.
         for(int k=0; k < K; ++k){
+//            std::cout<<termcolor::green<<"Computing Lambda "<<k<<endl;
+
             Lambda.slice(k) = GLasso(Q.slice(k), rho/Nk(k));          // Precision Matrix
 
             if (rcond(Lambda.slice(k)) < 0.01){  // Handle the case for singular matrix
-                std::clog<<termcolor::red<<"Warning! Lambda at slice "<<k<<" is ill-conditioned!";
-                invLambda.slice(k) = Q.slice(k);
+                std::cout<<termcolor::red<<"Warning! Lambda at slice "<<k<<" is ill-conditioned!"<<endl;
+                invLambda.slice(k) = pinv(Lambda.slice(k)); //Q.slice(k);
             } else {
+//                std::cout<<termcolor::green<<"Inverting lambda"<<Lambda.slice(k).size()<<endl;
+
                 invLambda.slice(k) =inv(Lambda.slice(k)); // Covariance Matrix
+//                std::cout<<approx_equal(invLambda.slice(k), Q.slice(k), "absdiff", 0.0002);
+
             }
             if(!invLambda.slice(k).is_symmetric()){
+//                std::cout<<termcolor::green<<"Computing invlambda to symmetric"<<endl;
                 to_symmetric(invLambda.slice(k));
             }
         }
@@ -229,6 +243,7 @@ void sparseGaussMix(const mat &X, // (N x M)
         assert(!invLambda.has_nan() && "invLambda has NANs");
 
         prev_loglik = loglik;
+//        std::cout<<termcolor::green<<"Computing LogLik"<<endl;
         loglik = compute_loglik(X, m, m0, r, pi, Lambda, invLambda, loglik_mat, rho, lambda0, N, K);
 
         // Check for convergence
@@ -238,7 +253,7 @@ void sparseGaussMix(const mat &X, // (N x M)
             has_converged = true;
 
             if(verbose){
-                std::clog<<termcolor::green <<"VB method for sparse Gaussian Mixtures has converged within "
+                std::cout<<termcolor::green <<"VB method for sparse Gaussian Mixtures has converged within "
                     <<tol<<" tolerance."<<endl;
             }
             break;
@@ -247,7 +262,7 @@ void sparseGaussMix(const mat &X, // (N x M)
 
     if (verbose && !has_converged){
         std::cerr<<termcolor::red <<"Warning: VB method of sparse Gaussian Mixtures has not converged after "
-            <<max_iter<<" iterations with error "<<dloglik <<". \n Check the hyper-parameters or increase the maximum iterations."<<endl;
+            <<max_iter<<" iterations with error "<<dloglik <<". \nCheck the hyper-parameters or increase the maximum iterations."<<endl;
     }
 
     // Next to Equation(37) in section 4.2
@@ -291,7 +306,7 @@ double compute_loglik(const Mat<double> &X,
         loglik_mat.col(k) = dmvnorm(X, m.row(k), invLambda.slice(k), true);
     }
 //    assert(!invLambda.has_nan() && "invLambda has NANs.");
-//    assert(!loglik_mat.has_nan() && "LogLik Matrix has NANs.");
+    assert(!loglik_mat.has_nan() && "LogLik Matrix has NANs.");
 
     for(int i=0; i < N; ++i){
         model_lik += loglik_mat(i, max_inds(i));

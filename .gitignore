@@ -176,3 +176,15 @@ dist/
 Examples/Data/
 
 wheelhouse/
+
+Examples/Untitled.ipynb
+
+tests/py_benchmark.pkl
+
+tests/sgmrf_comparison.png
+
+tests/sgmrf_infr_comparison.png
+
+tests/sgmrf_training_comparison.png
+
+*.pkl

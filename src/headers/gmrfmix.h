@@ -6,9 +6,9 @@
 #define GMRFMIX_H
 
 #endif //GMRFMIX_H
-
 #include <boost/math/special_functions/digamma.hpp>
 #include "../lib/termcolor.h"
+#include <cmath>
 
 
 void GMRFmix( const Mat<double> &X, // (N, M)
@@ -45,7 +45,7 @@ void GMRFmix( const Mat<double> &X, // (N, M)
 
     Mat<double> g_unnorm(N, K, fill::zeros);
 
-    double loglik = -datum::inf,
+    double loglik = 0.0,
            prev_loglik =0.0,
            delta_loglik;
 
@@ -60,8 +60,8 @@ void GMRFmix( const Mat<double> &X, // (N, M)
     alpha.fill(1.0);
 
     for (int i=0; i< M; ++i){
-        loglik = -datum::inf;
-        prev_loglik = -datum::inf;
+        loglik = 0.0;
+        prev_loglik = 0.0;
 
         // Equation (31) in section 4.2
         for(int k=0; k < K; ++k){
@@ -85,7 +85,7 @@ void GMRFmix( const Mat<double> &X, // (N, M)
                                boost::math::digamma(a_bar));  // Log theta
             }
 
-
+            assert(!theta.has_nan() && "GMRF Theta has NANs.");
             // Compute the Gating function (Posterior Distribution)
             // Equation (17) in section 3.2
             for(int k =0; k < K; ++k) {
@@ -97,6 +97,7 @@ void GMRFmix( const Mat<double> &X, // (N, M)
             vec denom = sum(g_mat, 1); // Sum each row
             g_mat.each_col() /= (denom + 1e-8);
 
+            assert(g_mat.is_finite() && "GMRF GMat has NANs.");
 
             // Equation (18)
             Nk = sum(g_mat, 0); // Sum each column
@@ -104,20 +105,20 @@ void GMRFmix( const Mat<double> &X, // (N, M)
             // Compute the log likelihood
             // Equation (10) in section 3.2
             prev_loglik = loglik;
-            loglik = accu(log(max(g_unnorm, 1))); // Row-wise max
+            loglik = accu(trunc_log(max(g_unnorm, 1))); // Row-wise max
+//            std::cout<<loglik<<endl;
 
             alpha_bar = accu(alpha);
             loglik -= lgamma(alpha_bar);
 
             loglik += accu(lgamma(alpha) + (alpha - 1.0) % log(theta));
-
+            assert(is_finite(loglik) && "GMRF LogLik resulted in NAN.");
 
             delta_loglik = abs(loglik - prev_loglik);
-
             if(delta_loglik < tol && is_finite(delta_loglik)){
 
                 if(verbose){
-                    std::clog<<termcolor::green<<"VB Method for dim="<< i
+                    std::cout<<termcolor::green<<"VB Method for dim="<< i
                              << " has converged within "<<tol<<" tolerance."<<endl;
                 }
                 theta_mat.row(i) = theta;
@@ -127,8 +128,8 @@ void GMRFmix( const Mat<double> &X, // (N, M)
         }
 
         if(!has_converged && verbose){
-            std::clog<<termcolor::red<<"Warning: VB method for "<< i << " has not converged after "
-                                     <<max_iter<<" iterations with error "<<delta_loglik <<".\n Check the hyper-parameters or increase the maximum iterations."<<endl;
+            std::cout<<termcolor::red<<"Warning: VB method for dim="<< i << " has not converged after "
+                                     <<max_iter<<" iterations with error "<<delta_loglik <<".\nCheck the hyper-parameters or increase the maximum iterations."<<endl;
         }
 
     }

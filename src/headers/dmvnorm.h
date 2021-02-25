@@ -18,6 +18,7 @@
 
 #endif //DMVNORM_H
 
+#include "../lib/termcolor.h"
 
 using namespace arma;
 
@@ -26,12 +27,30 @@ static double const log2pi = log(2.0 * M_PI);
 vec dmvnorm(const Mat<double> &x,
             const rowvec &mu,
             const Mat<double> &sigma,
-            bool return_log = false){
+            bool return_log = false,
+            int max_chol_tries = 100){
 
     int N = x.n_rows, D = x.n_cols;
     vec log_prob(N);
 
-    Mat<double> const rooti = inv(trimatu(chol(sigma)));
+    Mat<double> R;
+
+    if(!sigma.is_sympd()){
+        std::cout<<termcolor::red<<"Warning! Sigma is not PSD. Adding noise to diagonals. "<<endl;
+
+        bool success = false;
+        mat sigma_eps(sigma);
+
+        for(int i=0; i< max_chol_tries && !success; ++i) {
+            sigma_eps.diag() += 1e-16;
+            success = chol(R, sigma_eps);
+        }
+    }else{
+         R = chol(sigma);
+
+    }
+    Mat<double> rooti = inv(trimatu(R));
+
     double rootisum = accu(log(rooti.diag()));
     rootisum += -(double)D/2.0 * log2pi;
 

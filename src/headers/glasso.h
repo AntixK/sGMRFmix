@@ -18,7 +18,7 @@ SpMat<double> GLasso (const Mat<double> &S,
                       double alpha,
                       bool verbose = false,
                       double threshold = 1e-12,
-                      int max_iter = 10000){
+                      int max_iter = 1000){
     int N = S.n_cols;
 
     Mat<double> L(N, N);
@@ -42,6 +42,7 @@ SpMat<double> GLasso (const Mat<double> &S,
     if (lasso_thresh < 2 * eps){
         lasso_thresh = 2*eps;
     }
+//    std::cout<<"lasso_thresh:"<<lasso_thresh<<endl;
 
     // Cold Start
     SpMat<double> X(size(S));
@@ -63,6 +64,7 @@ SpMat<double> GLasso (const Mat<double> &S,
                     vj += W.col(k)*X(k,j);
                 }
             }
+            int inner_iter = 0;
             double dlx;
             do {
                 dlx = 0.0;
@@ -88,8 +90,13 @@ SpMat<double> GLasso (const Mat<double> &S,
                         }
                     }
                 }
-
-            } while (dlx >= lasso_thresh);
+                inner_iter ++;
+//                if(inner_iter > 500){
+////                    std::cout<<dlx<<endl;
+//                    std::cout<<inner_iter<<endl;
+//
+//                }
+            } while (dlx >= lasso_thresh && inner_iter < max_iter);
 
             vj(j) = d(j);
             dw = std::max(dw, accu(abs(vj - W.col(j))));
@@ -102,7 +109,7 @@ SpMat<double> GLasso (const Mat<double> &S,
         // Check for Convergence
         if (dw <= convergence_thresh){
           if(verbose){
-                std::clog<<termcolor::green <<"Fast GLASSO method has converged within "
+                std::cout<<termcolor::green <<"Fast GLASSO method has converged within "
                     <<convergence_thresh<<" tolerance."<<endl;
             }
             break;

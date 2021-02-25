@@ -1,5 +1,6 @@
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
+#include <pybind11/iostream.h>
 #include <armadillo>
 
 // sGMRFmix headers
@@ -160,6 +161,15 @@ py::tuple py_compute_anomaly(
 PYBIND11_MODULE(_sgmrfmix, module) {
 module.doc() = "A wrapper module around the sGMRFmix C++ implementation";
 
-module.def("sgmrfmix_fit", &py_sGMRFmix, "Fits a sGMRFmix model for the given data ");
-module.def("compute_anomaly_", &py_compute_anomaly, "Computes the anomaly score based on the learnt sGMRFmix model");
+//module.def("sgmrfmix_fit", &py_sGMRFmix, "Fits a sGMRFmix model for the given data ");
+//module.def("compute_anomaly_", &py_compute_anomaly, "Computes the anomaly score based on the learnt sGMRFmix model");
+// Add a scoped redirect for your noisy code
+module.def("sgmrfmix_fit", &py_sGMRFmix,
+                            py::call_guard<py::scoped_ostream_redirect,
+                            py::scoped_estream_redirect>(), "Fits a sGMRFmix model for the given data ");
+
+module.def("compute_anomaly_", &py_compute_anomaly,
+           py::call_guard<py::scoped_ostream_redirect,
+                   py::scoped_estream_redirect>(), "Computes the anomaly score based on the learnt sGMRFmix model");
+
 }

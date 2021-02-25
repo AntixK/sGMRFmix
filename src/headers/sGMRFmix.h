@@ -1,7 +1,7 @@
 /*
  *
  */
-
+//#undef NDEBUG
 #ifndef SGMRFMIX_H
 #define SGMRFMIX_H
 
@@ -42,7 +42,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
 
     // Preprocess data (Not required)
     if(verbose){
-        std::clog<<termcolor::blue<<"================= sGMRFmix Model ================="<<endl;
+        std::cout<<termcolor::blue<<"================= sGMRFmix Model ================="<<endl;
     }
 
     rowvec pi(K, fill::zeros);
@@ -50,14 +50,14 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     Mat<double> _m(K, M, fill::zeros);
 
     if(verbose){
-        std::clog<<termcolor::blue<<"Running sparse Gaussian Mixture Model."<<endl;
+        std::cout<<termcolor::blue<<"Running sparse Gaussian Mixture Model."<<endl;
     }
 
     auto start = sc.now();     // start timer
     sparseGaussMix(X, K, rho, m0, pi, Ak, _m, do_kmeans, lambda0, max_iter, tol, verbose);
 
     if(verbose){
-        std::clog<<termcolor::blue<<"Completed sparse Gaussian Mixture Model."<<endl;
+        std::cout<<termcolor::blue<<"Completed sparse Gaussian Mixture Model."<<endl;
     }
 
 
@@ -92,12 +92,12 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
                  W(N, M, new_K, fill::zeros);
 
     if(verbose){
-        std::clog<<termcolor::blue<<"Running sparse GMRF Model."<<endl;
+        std::cout<<termcolor::blue<<"Running sparse GMRF Model."<<endl;
     }
     GMRFmix(X, new_pi, A, m, log_theta_mat, U, W, g_mat, max_iter, tol, verbose);
 
     if(verbose){
-        std::clog<<termcolor::blue<<"Completed sparse GMRF Model."<<endl;
+        std::cout<<termcolor::blue<<"Completed sparse GMRF Model."<<endl;
     }
 
     // ============================================================================ //
@@ -116,9 +116,9 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     K = new_K;
     auto end = sc.now();
     auto time_span = static_cast<std::chrono::duration<double>>(end - start);
-    cout <<termcolor::blue<<"Operation took: " << time_span.count() << " seconds"<<endl;
+    std::cout <<termcolor::blue<<"Operation took: " << time_span.count() << " seconds"<<endl;
     if(verbose){
-        std::clog<<termcolor::blue<<"=================================================="<<endl;
+        std::cout<<termcolor::blue<<"=================================================="<<endl;
     }
 
 }
