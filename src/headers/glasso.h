@@ -96,7 +96,7 @@ SpMat<double> GLasso (const Mat<double> &S,
 //                    std::cout<<inner_iter<<endl;
 //
 //                }
-            } while (dlx >= lasso_thresh && inner_iter < max_iter);
+            } while (dlx >= lasso_thresh && inner_iter < max_iter / 10);
 
             vj(j) = d(j);
             dw = std::max(dw, accu(abs(vj - W.col(j))));

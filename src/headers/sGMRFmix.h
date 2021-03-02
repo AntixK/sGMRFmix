@@ -24,6 +24,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
               Cube<double> &A, // (M, M, K)
               Mat<double> &m, // (K, M)
               Mat<double> &g_mat, // (N , K)
+              rowvec &result_pi,
               bool do_kmeans=false,
               double pi_threshold = 0.01,
               double lambda0 = 1.0,
@@ -66,21 +67,22 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     int new_K = inds.n_elem;
 
     // Reset the pi based on optimal number of mixtures
-    rowvec new_pi(new_K, fill::zeros);
+    result_pi.resize(new_K);
+    result_pi.fill(0.0);
     A.resize(M, M, new_K);
     m.resize(new_K, M);
 
     double pi_sum = 0.0;
     for(int k=0; k < new_K; ++k){
 
-        new_pi(k) = pi(inds(k));
+        result_pi(k) = pi(inds(k));
         A.slice(k) = Ak.slice(inds(k));
         m.row(k) = _m.row(inds(k));
 
-        pi_sum += new_pi(k);
+        pi_sum += result_pi(k);
 
     }
-    for(auto &p : new_pi){
+    for(auto &p : result_pi){
         p /= pi_sum;
     }
 
@@ -94,7 +96,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     if(verbose){
         std::cout<<termcolor::blue<<"Running sparse GMRF Model."<<endl;
     }
-    GMRFmix(X, new_pi, A, m, log_theta_mat, U, W, g_mat, max_iter, tol, verbose);
+    GMRFmix(X, result_pi, A, m, log_theta_mat, U, W, g_mat, max_iter, tol, verbose);
 
     if(verbose){
         std::cout<<termcolor::blue<<"Completed sparse GMRF Model."<<endl;
@@ -114,6 +116,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
 
     // Return Results
     K = new_K;
+
     auto end = sc.now();
     auto time_span = static_cast<std::chrono::duration<double>>(end - start);
     std::cout <<termcolor::blue<<"Operation took: " << time_span.count() << " seconds"<<endl;

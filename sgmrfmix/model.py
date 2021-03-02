@@ -34,6 +34,7 @@ class sGMRFmix:
         self.model_param['precision_matrices'] = None
         self.model_param['mean_vectors'] = None
         self.model_param['gating_matrix'] = None
+        self.model_param['pi'] = None
 
 
     def __repr__(self):
@@ -62,6 +63,7 @@ class sGMRFmix:
         self.model_param['precision_matrices'] = results[0]
         self.model_param['mean_vectors'] = results[1]
         self.model_param['gating_matrix'] = results[2]
+        self.model_param['pi'] = results[3][:results[0].shape[2]]
 
     def compute_anomaly(self, test_data:np.ndarray):
         N, M = test_data.shape

@@ -23,6 +23,7 @@ arma::rowvec arr_to_rowvec(py::array_t<double, py::array::f_style> &arr){
     return vec;
 }
 
+
 arma::mat arr_to_mat(py::array_t<double, py::array::f_style> &arr){
     int N = arr.shape()[0];
     int M = arr.shape()[1];
@@ -88,6 +89,16 @@ py::array_t<double> cube_to_arr(arma::cube &cube){
     return arr;
 }
 
+py::array_t<double> rowvec_to_arr(arma::rowvec &v){
+//    py::ssize_t strides[2];
+//    strides[0] = sizeof(double) * v.n_cols;
+//    strides[1] = sizeof(double);
+    auto arr = py::array(py::buffer_info(
+            v.memptr(),sizeof(double)));
+
+    return arr;
+}
+
 /* ---------------------------
  *     Python Interface
  * --------------------------*/
@@ -112,19 +123,21 @@ py::tuple py_sGMRFmix(
 
     arma::cube A;
     arma::mat m,g_mat;
+    arma::rowvec pi;
 
     // Convert pybind numpy objects to armadillo objects
     arma::mat X = arr_to_mat(train_data);
     arma::rowvec _m0 = arr_to_rowvec(m0);
 
-    sGMRFmix(X, init_K, rho, _m0, A, m,  g_mat, false, pi_threshold,lambda0, max_iter, tol, verbose, random_seed);
+    sGMRFmix(X, init_K, rho, _m0, A, m,  g_mat, pi, false, pi_threshold,lambda0, max_iter, tol, verbose, random_seed);
 
     // Convert armadillo objects back to numpy objects
     auto m_ = mat_to_arr(m);
     auto g_mat_ = mat_to_arr(g_mat);
     auto A_ = cube_to_arr(A);
+    auto pi_ = rowvec_to_arr(pi);
 
-    return py::make_tuple(A_, m_, g_mat_);
+    return py::make_tuple(A_, m_, g_mat_, pi_);
 }
 
 py::tuple py_compute_anomaly(
