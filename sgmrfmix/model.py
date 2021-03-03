@@ -91,7 +91,7 @@ class sGMRFmix:
     def save(self, filename:str):
         # print("Saving sGMRFmix Model ============================")
 
-        assert filename.split('.')[1] == "pkl", "File extension must be a pkl"
+        assert str(filename).split('.')[1] == "pkl", "File extension must be a pkl"
 
         with open(filename, 'wb') as file:
             pickle.dump(self.model_param, file)
