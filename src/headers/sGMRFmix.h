@@ -25,6 +25,8 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
               Mat<double> &m, // (K, M)
               Mat<double> &g_mat, // (N , K)
               rowvec &result_pi,
+              ucolvec &mode,
+              // Misc arguments
               bool do_kmeans=false,
               double pi_threshold = 0.01,
               double lambda0 = 1.0,
@@ -67,10 +69,10 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     int new_K = inds.n_elem;
 
     // Reset the pi based on optimal number of mixtures
-    result_pi.resize(new_K);
+    result_pi.set_size(new_K);
     result_pi.fill(0.0);
-    A.resize(M, M, new_K);
-    m.resize(new_K, M);
+    A.set_size(M, M, new_K);
+    m.set_size(new_K, M);
 
     double pi_sum = 0.0;
     for(int k=0; k < new_K; ++k){
@@ -87,7 +89,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
     }
 
     // Placeholders for GMRF results
-    g_mat.resize(N, new_K);
+    g_mat.set_size(N, new_K);
     Mat<double> log_theta_mat(M, new_K, fill::zeros);
 
     Cube<double> U(N, M, new_K, fill::zeros),
@@ -111,8 +113,14 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
         Sigma = inv_sympd(A.slice(k));
         loglik_mat.col(k) = dmvnorm(X, m.row(k), Sigma, true);
     }
+    std::cout<<"new_K:"<<new_K<<"\nloglik_mat size:"<<size(loglik_mat)<<endl;
 
-    ucolvec mode = index_max(loglik_mat, 1); // index of Max value in each row
+//    mode.set_size(N);
+//    mode( index_max(loglik_mat, 1));
+    ucolvec mo = index_max(loglik_mat, 1); // index of Max value in each row
+//    std::cout<<mo<<endl;
+    mode = mo;
+//    mo.save('mode.csv', csv_ascii);
 
     // Return Results
     K = new_K;

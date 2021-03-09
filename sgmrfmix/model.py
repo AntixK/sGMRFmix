@@ -5,6 +5,12 @@ import pprint
 
 class sGMRFmix:
 
+    __param_names__ = ['precision_matrices',
+                       'mean_vectors',
+                       'gating_matrix',
+                       'pi',
+                       'mode']
+
     def __init__(self,
                  K:int,
                  rho:float,
@@ -35,6 +41,7 @@ class sGMRFmix:
         self.model_param['mean_vectors'] = None
         self.model_param['gating_matrix'] = None
         self.model_param['pi'] = None
+        self.model_param['mode'] = None
 
 
     def __repr__(self):
@@ -64,6 +71,7 @@ class sGMRFmix:
         self.model_param['mean_vectors'] = results[1]
         self.model_param['gating_matrix'] = results[2]
         self.model_param['pi'] = results[3][:results[0].shape[2]]
+        self.model_param['mode'] = results[4]
 
     def compute_anomaly(self, test_data:np.ndarray):
         N, M = test_data.shape
@@ -104,6 +112,8 @@ class sGMRFmix:
         assert 'precision_matrices' in params, f"Given {filename} does not contain 'precision_matrices' key"
         assert 'mean_vectors' in params, f"Given {filename} does not contain 'mean_vectors' key"
         assert 'gating_matrix' in params, f"Given {filename} does not contain 'gating_matrix' key"
+        assert 'pi' in params, f"Given {filename} does not contain 'pi' key"
+        assert 'mode' in params, f"Given {filename} does not contain 'mode' key"
 
         self.model_param = params
 
