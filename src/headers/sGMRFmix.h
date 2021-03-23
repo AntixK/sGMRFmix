@@ -113,7 +113,7 @@ void sGMRFmix(const Mat<double> &X, // (N, M)
         Sigma = inv_sympd(A.slice(k));
         loglik_mat.col(k) = dmvnorm(X, m.row(k), Sigma, true);
     }
-    std::cout<<"new_K:"<<new_K<<"\nloglik_mat size:"<<size(loglik_mat)<<endl;
+//    std::cout<<"new_K:"<<new_K<<"\nloglik_mat size:"<<size(loglik_mat)<<endl;
 
 //    mode.set_size(N);
 //    mode( index_max(loglik_mat, 1));
