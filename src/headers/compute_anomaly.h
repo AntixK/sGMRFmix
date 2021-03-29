@@ -27,7 +27,7 @@ void compute_anomaly_score(const Mat<double> &X,  // (N x M)
     std::chrono::steady_clock sc;
 
     if(verbose){
-        std::clog<<termcolor::blue<<"============ Computing anomaly score ============="<<endl;
+        std::cout<<termcolor::blue<<"============ Computing anomaly score ============="<<endl;
     }
 
     auto start = sc.now();     // start timer
@@ -58,8 +58,8 @@ void compute_anomaly_score(const Mat<double> &X,  // (N x M)
     }
     auto end = sc.now();
     auto time_span = static_cast<std::chrono::duration<double>>(end - start);
-    cout <<termcolor::blue<<"Operation took: " << time_span.count() << " seconds"<<endl;
+    std::cout <<termcolor::blue<<"Operation took: " << time_span.count() << " seconds"<<endl;
     if(verbose){
-        std::clog<<termcolor::blue<<"=================================================="<<endl;
+        std::cout<<termcolor::blue<<"=================================================="<<endl;
     }
 }

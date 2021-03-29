@@ -30,7 +30,8 @@ set(SOURCE_FILES
     src/headers/gmrfmix.h
     src/headers/sgaussmix.h
     src/headers/sGMRFmix.h
-    src/lib/termcolor.h)
+    src/lib/termcolor.h
+    )
 
 include_directories("${PROJECT_SOURCE_DIR}/")
 #add_subdirectory(src)

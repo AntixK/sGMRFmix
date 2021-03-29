@@ -1,7 +1,15 @@
 import numpy as np
 import _sgmrfmix as sgm
+import pickle
+import pprint
 
 class sGMRFmix:
+
+    __param_names__ = ['precision_matrices',
+                       'mean_vectors',
+                       'gating_matrix',
+                       'pi',
+                       'mode']
 
     def __init__(self,
                  K:int,
@@ -12,28 +20,33 @@ class sGMRFmix:
                  max_iter:int=500,
                  tol:float=1e-1,
                  verbose:bool= True,
-                 random_seed:int=314):
+                 random_seed:int=314,
+                 **kwargs):
         self.K = K
         self.rho = rho
+        self.m0 = m0
         self.pi_threshold = pi_threshold
         self.lambda0 = lambda0
         self.max_iter = max_iter
         self.tol = tol
-        self.random_seed = random_seed
         self.verbose = verbose
+        self.random_seed = random_seed
         np.random.seed(random_seed)
         # np.printoptions(precision=2, supress=True)
 
-        self.m0 = m0
         self.do_kmeans = False
 
         self.model_param = {}
         self.model_param['precision_matrices'] = None
         self.model_param['mean_vectors'] = None
         self.model_param['gating_matrix'] = None
+        self.model_param['pi'] = None
+        self.model_param['mode'] = None
+
 
     def __repr__(self):
-        pass
+        return self.__class__.__name__ + \
+               f"({','.join([f'{k} = {v}' for i, (k,v) in enumerate(self.__dict__.items()) if i < 9])})"
 
     def fit(self, train_data:np.ndarray):
         N, M = train_data.shape
@@ -57,6 +70,8 @@ class sGMRFmix:
         self.model_param['precision_matrices'] = results[0]
         self.model_param['mean_vectors'] = results[1]
         self.model_param['gating_matrix'] = results[2]
+        self.model_param['pi'] = results[3][:results[0].shape[2]]
+        self.model_param['mode'] = results[4]
 
     def compute_anomaly(self, test_data:np.ndarray):
         N, M = test_data.shape
@@ -77,3 +92,28 @@ class sGMRFmix:
             print(val)
 
         print("==================================================")
+
+    def get_params(self):
+        return self.model_param
+
+    def save(self, filename:str):
+        # print("Saving sGMRFmix Model ============================")
+
+        assert str(filename).split('.')[1] == "pkl", "File extension must be a pkl"
+
+        with open(filename, 'wb') as file:
+            pickle.dump(self.model_param, file)
+
+    def load(self, filename:str):
+        with open(filename, "rb") as fp:
+            params = pickle.load(fp)
+
+        # Check for the relevant keys
+        assert 'precision_matrices' in params, f"Given {filename} does not contain 'precision_matrices' key"
+        assert 'mean_vectors' in params, f"Given {filename} does not contain 'mean_vectors' key"
+        assert 'gating_matrix' in params, f"Given {filename} does not contain 'gating_matrix' key"
+        assert 'pi' in params, f"Given {filename} does not contain 'pi' key"
+        assert 'mode' in params, f"Given {filename} does not contain 'mode' key"
+
+        self.model_param = params
+

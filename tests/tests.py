@@ -12,7 +12,8 @@ class TestsGMRFmix(unittest.TestCase):
         # print(train.shape, test.shape)
         self.m.fit(self.train)
         self.m.show_model_params()
-        results = self.m.compute_anomaly(self.test)[0]
+        results = self.m.compute_anomaly(self.test)
+
         # print("anomaly score:")
         # print(results)
         # # print([r.shape for r in results])

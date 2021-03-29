@@ -11,6 +11,11 @@ sGMRFmix is a mixture of GMRFs that predict the likelihood of a random variable 
   
 ![sGMRFmix Model](https://github.com/AntixK/sGMRFmix/blob/main/assets/model_overview.png)
 
+## Performance Comparison
+The follwing plot shows the performance comparison with the only [`sGMRFmix`](https://cran.r-project.org/web/packages/sGMRFmix/index.html) library available publicaly in R language.
+ 
+![sGMRFmix Model](https://github.com/AntixK/sGMRFmix/blob/dev/assets/sgmrf_comparison.png)
+
 ## Installation
 
 ### Requirements

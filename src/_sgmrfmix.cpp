@@ -1,5 +1,6 @@
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
+#include <pybind11/iostream.h>
 #include <armadillo>
 
 // sGMRFmix headers
@@ -21,6 +22,7 @@ arma::rowvec arr_to_rowvec(py::array_t<double, py::array::f_style> &arr){
             /*strict*/ true);
     return vec;
 }
+
 
 arma::mat arr_to_mat(py::array_t<double, py::array::f_style> &arr){
     int N = arr.shape()[0];
@@ -87,6 +89,26 @@ py::array_t<double> cube_to_arr(arma::cube &cube){
     return arr;
 }
 
+py::array_t<double> rowvec_to_arr(arma::rowvec &v){
+//    py::ssize_t strides[2];
+//    strides[0] = sizeof(double) * v.n_cols;
+//    strides[1] = sizeof(double);
+    auto arr = py::array(py::buffer_info(
+            v.memptr(),v.n_cols));
+
+    return arr;
+}
+
+py::array_t<double> vec_to_arr(arma::ucolvec &v){
+//    py::ssize_t strides[2];
+//    strides[0] = sizeof(double) * v.n_cols;
+//    strides[1] = sizeof(double);
+    auto arr = py::array(py::buffer_info(
+            v.memptr(),v.n_rows));
+
+    return arr;
+}
+
 /* ---------------------------
  *     Python Interface
  * --------------------------*/
@@ -111,19 +133,37 @@ py::tuple py_sGMRFmix(
 
     arma::cube A;
     arma::mat m,g_mat;
+    arma::rowvec pi;
+    arma::ucolvec mode;
 
     // Convert pybind numpy objects to armadillo objects
     arma::mat X = arr_to_mat(train_data);
     arma::rowvec _m0 = arr_to_rowvec(m0);
 
-    sGMRFmix(X, init_K, rho, _m0, A, m,  g_mat, false, pi_threshold,lambda0, max_iter, tol, verbose, random_seed);
+    sGMRFmix(X,
+            init_K, rho,
+            _m0,
+            A,
+            m,
+            g_mat,
+            pi,
+            mode,
+            false,
+            pi_threshold,
+            lambda0,
+            max_iter,
+            tol,
+            verbose,
+            random_seed);
 
     // Convert armadillo objects back to numpy objects
     auto m_ = mat_to_arr(m);
     auto g_mat_ = mat_to_arr(g_mat);
     auto A_ = cube_to_arr(A);
+    auto pi_ = rowvec_to_arr(pi);
+    auto mode_ = vec_to_arr(mode);
 
-    return py::make_tuple(A_, m_, g_mat_);
+    return py::make_tuple(A_, m_, g_mat_, pi_, mode_);
 }
 
 py::tuple py_compute_anomaly(
@@ -160,6 +200,15 @@ py::tuple py_compute_anomaly(
 PYBIND11_MODULE(_sgmrfmix, module) {
 module.doc() = "A wrapper module around the sGMRFmix C++ implementation";
 
-module.def("sgmrfmix_fit", &py_sGMRFmix, "Fits a sGMRFmix model for the given data ");
-module.def("compute_anomaly_", &py_compute_anomaly, "Computes the anomaly score based on the learnt sGMRFmix model");
+//module.def("sgmrfmix_fit", &py_sGMRFmix, "Fits a sGMRFmix model for the given data ");
+//module.def("compute_anomaly_", &py_compute_anomaly, "Computes the anomaly score based on the learnt sGMRFmix model");
+// Add a scoped redirect for your noisy code
+module.def("sgmrfmix_fit", &py_sGMRFmix,
+                            py::call_guard<py::scoped_ostream_redirect,
+                            py::scoped_estream_redirect>(), "Fits a sGMRFmix model for the given data ");
+
+module.def("compute_anomaly_", &py_compute_anomaly,
+           py::call_guard<py::scoped_ostream_redirect,
+                   py::scoped_estream_redirect>(), "Computes the anomaly score based on the learnt sGMRFmix model");
+
 }
